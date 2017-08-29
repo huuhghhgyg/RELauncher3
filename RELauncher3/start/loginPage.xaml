@@ -1,0 +1,26 @@
+﻿<Grid
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:RELauncher3.start"
+      xmlns:Controls="http://metro.mahapps.com/winfx/xaml/controls"
+      xmlns:Custom="http://metro.mahapps.com/winfx/xaml/controls" x:Name="changeGrid" x:Class="RELauncher3.start.loginPage"
+      mc:Ignorable="d" 
+      d:DesignHeight="470" d:DesignWidth="900">
+
+    <Grid Background="#FF00BCD4">
+        <TextBox x:Name="usrtxt" HorizontalAlignment="Left" Height="23" Margin="44,100,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="300" Custom:TextBoxHelper.Watermark="用户名" />
+        <PasswordBox x:Name="passwordBox" HorizontalAlignment="Left" Margin="44,130,0,0" VerticalAlignment="Top" Width="300" Custom:TextBoxHelper.Watermark="密码"/>
+        <TextBlock x:Name="textBlock" HorizontalAlignment="Left" TextWrapping="Wrap" Text="登录正版游戏账户" VerticalAlignment="Top" Foreground="White" Margin="50,40,0,0" FontSize="26.667"/>
+        <Button x:Name="noAccount" Content="我没有正版游戏账号" HorizontalAlignment="Left" Margin="50,0,0,30" VerticalAlignment="Bottom" Width="145" Background="#FF00BCD4" BorderBrush="#FF00BCD4" Foreground="White" Height="30" Click="noAccount_Click"/>
+        <Controls:Flyout x:Name="tips" Header="请输入密码(没有正版账号吗?)" Position="Bottom" AutoCloseInterval="2500" IsAutoCloseEnabled="True" Theme="Accent">
+            <StackPanel Height="80"
+                            Margin="5,5,5,5"
+                            HorizontalAlignment="Right"
+                            Orientation="Horizontal">
+            </StackPanel>
+        </Controls:Flyout>
+        <Button x:Name="nextBtn" Content="下一步" HorizontalAlignment="Right" Margin="0,0,50,30" VerticalAlignment="Bottom" Width="100" Height="30" Style="{StaticResource AccentedSquareButtonStyle}" BorderBrush="#CC119EDA" Click="nextBtn_Click" Background="#CC119EDA"/>
+    </Grid>
+</Grid>

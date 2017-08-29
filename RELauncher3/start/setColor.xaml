@@ -1,0 +1,30 @@
+﻿<Grid x:Name="showGrid" x:Class="RELauncher3.start.setColor"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:Controls="http://metro.mahapps.com/winfx/xaml/controls"
+      xmlns:local="clr-namespace:RELauncher3.start"
+      mc:Ignorable="d" 
+      d:DesignHeight="470" d:DesignWidth="900">
+    <Grid.ColumnDefinitions>
+        <ColumnDefinition/>
+    </Grid.ColumnDefinitions>
+    <Grid x:Name="BackGroundGrid" OpacityMask="Black" Background="White">
+        <Grid.RowDefinitions>
+            <RowDefinition/>
+        </Grid.RowDefinitions>
+        <ComboBox x:Name="comboBox" HorizontalAlignment="Left" VerticalAlignment="Top" Width="350" Margin="50,120,0,0" SelectionChanged="comboBox_SelectionChanged"/>
+        <TextBlock x:Name="textBlock" HorizontalAlignment="Left" TextWrapping="Wrap" VerticalAlignment="Top" Foreground="Black" FontSize="26.667" Margin="50,40,0,0"><Run Text="选择"/><Run Text="一种颜色"/></TextBlock>
+        <Controls:Flyout x:Name="tips" Header="请先选择一种颜色" Position="Bottom" AutoCloseInterval="2500" IsAutoCloseEnabled="True">
+            <StackPanel Height="80"
+                            Margin="5,5,5,5"
+                            HorizontalAlignment="Right"
+                            Orientation="Horizontal">
+            </StackPanel>
+        </Controls:Flyout>
+        <Button x:Name="NextBtn" Width="100"
+                    Content="下一步"
+                    Style="{DynamicResource AccentedSquareButtonStyle}" Margin="0,0,50,30" HorizontalAlignment="Right" Height="31" VerticalAlignment="Bottom" Click="NextBtn_Click" BorderBrush="{x:Null}" />
+    </Grid>
+</Grid>

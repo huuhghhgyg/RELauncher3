@@ -1,0 +1,82 @@
+﻿<Grid x:Name="showGrid" x:Class="RELauncher3.Launcher.ThemePage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:Controls="http://metro.mahapps.com/winfx/xaml/controls"
+      xmlns:local="clr-namespace:RELauncher3.Launcher"
+      mc:Ignorable="d" 
+      d:DesignHeight="470" d:DesignWidth="900">
+    <Grid.ColumnDefinitions>
+        <ColumnDefinition/>
+    </Grid.ColumnDefinitions>
+
+    <Grid Background="White">
+        <TabControl x:Name="Theme1" Controls:TabControlHelper.Underlined="TabPanel" TabStripPlacement="Left" Margin="0,40,0,0" HorizontalContentAlignment="Stretch" VerticalContentAlignment="Stretch">
+            <TabItem Header=" 颜色     " Height="38" VerticalAlignment="Top">
+                <Grid Background="White" Margin="0">
+                    <TextBlock HorizontalAlignment="Left" VerticalAlignment="Top" FontSize="16" Margin="10,10,0,0" Text="当前使用颜色"></TextBlock>
+                    <Controls:Tile x:Name="tile" Width="40" Height="40" Margin="10,35,0,0" HorizontalAlignment="Left" VerticalContentAlignment="Top" VerticalAlignment="Top" />
+
+                    <WrapPanel Margin="5,110,440,0" Width="230" HorizontalAlignment="Left" VerticalAlignment="Top">
+                        <Controls:Tile x:Name="RedTile" Width="40" Height="40" Margin="5,5,0,0" HorizontalAlignment="Left" VerticalContentAlignment="Top" VerticalAlignment="Top" Background="#FFEA4333" Click="RedTile_Click" />
+                        <Controls:Tile x:Name="GreenTile" Width="40" Height="40" Margin="5,5,0,0" HorizontalAlignment="Left" VerticalContentAlignment="Top" VerticalAlignment="Top" Background="#FF80BA45" Click="GreenTile_Click" />
+                        <Controls:Tile x:Name="BlueTile" Width="40" Height="40" Margin="5,5,0,0" HorizontalAlignment="Left" VerticalContentAlignment="Top" VerticalAlignment="Top" Background="#FF41B1E1" Click="BlueTile_Click" />
+                        <Controls:Tile x:Name="PurpleTile" Width="40" Height="40" Margin="5,5,0,0" HorizontalAlignment="Left" VerticalContentAlignment="Top" VerticalAlignment="Top" Background="#FF837AE5" Click="PurpleTile_Click" />
+                        <Controls:Tile x:Name="OrangeTile" Width="40" Height="40" Margin="5,5,0,0" HorizontalAlignment="Left" VerticalContentAlignment="Top" VerticalAlignment="Top" Background="#FFFB8633" Click="OrangeTile_Click" />
+                        <Controls:Tile x:Name="LimeTile" Width="40" Height="40" Margin="5,5,0,0" HorizontalAlignment="Left" VerticalContentAlignment="Top" VerticalAlignment="Top" Background="#FFB6D033" Click="LimeTile_Click" />
+                        <Controls:Tile x:Name="EmeraldTile" Width="40" Height="40" Margin="5,5,0,0" HorizontalAlignment="Left" VerticalContentAlignment="Top" VerticalAlignment="Top" Background="#FF33A133" Click="EmeraldTile_Click" />
+                        <Controls:Tile x:Name="TealTile" Width="40" Height="40" Margin="5,5,0,0" HorizontalAlignment="Left" VerticalContentAlignment="Top" VerticalAlignment="Top" Background="#FF33BCBA" Click="TealTile_Click" />
+                        <Controls:Tile x:Name="CyanTile" Width="40" Height="40" Margin="5,5,0,0" HorizontalAlignment="Left" VerticalContentAlignment="Top" VerticalAlignment="Top" Background="#FF49B4E8" Click="CyanTile_Click" />
+                        <Controls:Tile x:Name="CobaltTile" Width="40" Height="40" Margin="5,5,0,0" HorizontalAlignment="Left" VerticalContentAlignment="Top" VerticalAlignment="Top" Background="#FF3373F2" Click="CobaltTile_Click" />
+                        <Controls:Tile x:Name="IndigoTile" Width="40" Height="40" Margin="5,5,0,0" HorizontalAlignment="Left" VerticalContentAlignment="Top" VerticalAlignment="Top" Background="#FF8833FF" Click="IndigoTile_Click" />
+                        <Controls:Tile x:Name="VioletTile" Width="40" Height="40" Margin="5,5,0,0" HorizontalAlignment="Left" VerticalContentAlignment="Top" VerticalAlignment="Top" Background="#FFBB33FF" Click="VioletTile_Click" />
+                        <Controls:Tile x:Name="PinkTile" Width="40" Height="40" Margin="5,5,0,0" HorizontalAlignment="Left" VerticalContentAlignment="Top" VerticalAlignment="Top" Background="#FFF68ED9" Click="PinkTile_Click" />
+                        <Controls:Tile x:Name="MagentaTile" Width="40" Height="40" Margin="5,5,0,0" HorizontalAlignment="Left" VerticalContentAlignment="Top" VerticalAlignment="Top" Background="#FFE0338F" Click="MagentaTile_Click" />
+                        <Controls:Tile x:Name="CrimsonTile" Width="40" Height="40" Margin="5,5,0,0" HorizontalAlignment="Left" VerticalContentAlignment="Top" VerticalAlignment="Top" Background="#FFB53351" Click="CrimsonTile_Click" />
+                        <Controls:Tile x:Name="AmberTile" Width="40" Height="40" Margin="5,5,0,0" HorizontalAlignment="Left" VerticalContentAlignment="Top" VerticalAlignment="Top" Background="#FFF3B53B" Click="AmberTile_Click" />
+                        <Controls:Tile x:Name="YellowTile" Width="40" Height="40" Margin="5,5,0,0" HorizontalAlignment="Left" VerticalContentAlignment="Top" VerticalAlignment="Top" Background="#FFFEE538" Click="YellowTile_Click" />
+                        <Controls:Tile x:Name="BrownTile" Width="40" Height="40" Margin="5,5,0,0" HorizontalAlignment="Left" VerticalContentAlignment="Top" VerticalAlignment="Top" Background="#FF9B7B56" Click="BrownTile_Click" />
+                        <Controls:Tile x:Name="OliveTile" Width="40" Height="40" Margin="5,5,0,0" HorizontalAlignment="Left" VerticalContentAlignment="Top" VerticalAlignment="Top" Background="#FF8A9F83" Click="OliveTile_Click" />
+                        <Controls:Tile x:Name="SteelTile" Width="40" Height="40" Margin="5,5,0,0" HorizontalAlignment="Left" VerticalContentAlignment="Top" VerticalAlignment="Top" Background="#FF83919F" Click="SteelTile_Click" />
+                        <Controls:Tile x:Name="MauveTile" Width="40" Height="40" Margin="5,5,0,0" HorizontalAlignment="Left" VerticalContentAlignment="Top" VerticalAlignment="Top" Background="#FF9180A1" Click="MauveTile_Click" />
+                        <Controls:Tile x:Name="TaupeTile" Width="40" Height="40" Margin="5,5,0,0" HorizontalAlignment="Left" VerticalContentAlignment="Top" VerticalAlignment="Top" Background="#FF9F9471" Click="TaupeTile_Click" />
+                        <Controls:Tile x:Name="SiennaTile" Width="40" Height="40" Margin="5,5,0,0" HorizontalAlignment="Left" VerticalContentAlignment="Top" VerticalAlignment="Top" Background="#FFB37557" Click="SiennaTile_Click" />
+
+                    </WrapPanel>
+                    <TextBlock HorizontalAlignment="Left" TextWrapping="Wrap" VerticalAlignment="Top" FontSize="16" Margin="10,94,0,0" Text="选择一种颜色"/>
+                    <TextBlock x:Name="ColorBlock" HorizontalAlignment="Left" Margin="55,45,0,0" TextWrapping="Wrap" VerticalAlignment="Top" FontSize="18" Text="Color"/>
+                    <TextBlock HorizontalAlignment="Right" VerticalAlignment="Top" FontSize="16" Margin="0,75,139,0" Text="当前使用背景"/>
+                    <Grid x:Name="ExampleGrid" HorizontalAlignment="Right" Height="117" Margin="0,100,10,0" VerticalAlignment="Top" Width="225" Background="White"/>
+                    <Button x:Name="SelectPictureButton" Content="选择" Margin="0,222,10,0" Style="{StaticResource AccentedSquareButtonStyle}" BorderBrush="#CC119EDA" Background="#CC119EDA" Height="30" VerticalAlignment="Top" HorizontalAlignment="Right" Width="100" Click="SelectPictureButton_Click" IsEnabled="{Binding IsChecked, ElementName=YourPictureSwitch}"/>
+                    <Controls:ToggleSwitch x:Name="YourPictureSwitch"
+                        Header="使用自定义图片"
+                        Style="{StaticResource MahApps.Metro.Styles.ToggleSwitch.Win10}"
+                        OffLabel="否"
+                        OnLabel="是" HorizontalAlignment="Right" VerticalAlignment="Top" Margin="0,10,115,0" Height="60" Width="120" Click="YourPictureSwitch_Click" />
+                </Grid>
+            </TabItem>
+            <TabItem Header=" 主题     ">
+                <Grid Background="White" ScrollViewer.VerticalScrollBarVisibility="Auto" Margin="0">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition/>
+                    </Grid.ColumnDefinitions>
+                    <ScrollViewer Margin="0" Background="White">
+                        <WrapPanel x:Name="ThemeList" ScrollViewer.VerticalScrollBarVisibility="Disabled">
+                        </WrapPanel>
+                    </ScrollViewer>
+                </Grid>
+            </TabItem>
+            <Image Height="100" Width="100"/>
+        </TabControl>
+        <Controls:Tile x:Name="BackTile" Width="60" Height="40" HorizontalAlignment="Left" Margin="0" Foreground="{x:Null}" VerticalAlignment="Top" Click="BackTile_Click">
+            <Rectangle Fill="White" Width="20" Height="20">
+                <Rectangle.OpacityMask>
+                    <VisualBrush Visual="{StaticResource appbar_arrow_left}" Stretch="Uniform" />
+                </Rectangle.OpacityMask>
+            </Rectangle>
+        </Controls:Tile>
+        <TextBlock x:Name="textBlock" HorizontalAlignment="Left" Margin="73,10,0,440" TextWrapping="Wrap" Text="主题" FontSize="16"/>
+
+    </Grid>
+</Grid>
