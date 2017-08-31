@@ -19,7 +19,7 @@
                 </Rectangle.OpacityMask>
             </Rectangle>
         </Grid>
-        <TextBlock x:Name="usrNameblk" HorizontalAlignment="Left" Margin="125,150,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Foreground="White" FontSize="26.667" Text="USERNAME" Height="34"/>
+        <TextBlock x:Name="usrNameblk" HorizontalAlignment="Left" Margin="125,144,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Foreground="White" FontSize="26.667" Height="34"><Run Text="USERNAME"/><LineBreak/><Run/><LineBreak/><Run Text=""/></TextBlock>
         <Button x:Name="nextBtn" Content="下一步" HorizontalAlignment="Right" Margin="0,0,50,30" VerticalAlignment="Bottom" Width="100" Height="30" Style="{StaticResource AccentedSquareButtonStyle}" BorderBrush="#CC119EDA" Click="nextBtn_Click"/>
         <TextBlock x:Name="textBlock1" HorizontalAlignment="Left" TextWrapping="Wrap" VerticalAlignment="Top" FontSize="16" Foreground="White" Margin="50,79,0,0"><Run Text="用户名建议由数字"/><Run Text=","/><Run Text="英文字母和下划线组成"/></TextBlock>
         <TextBlock x:Name="textBlock2" HorizontalAlignment="Left" Margin="50,104,0,0" TextWrapping="Wrap" Text="这将是您出入服务器的凭证" VerticalAlignment="Top" Foreground="White" FontSize="16"/>
