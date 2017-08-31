@@ -79,12 +79,38 @@ namespace RELauncher3.Launcher
             }
             if (File.Exists("./RE3/ThemeList.tmp") == true)//如果指定tmp文件存在
             {
-                File.Delete("./RE3/ThemeList.tmp");//删除指定tmp文件
+            ReDelete://标签
+                try//尝试删除
+                {
+                    Dispatcher.Invoke(new Action(delegate
+                    {
+                        File.Delete("./RE3/ThemeList.tmp");//删除指定tmp文件
+                    }));
+                }
+                catch (System.IO.IOException)//删除失败，文件被其他线程占用
+                {
+                    Thread.Sleep(100);
+                    goto ReDelete;//回到再次删除
+                }
             }
 
-            StreamWriter sw = new StreamWriter("./RE3/ThemeList.tmp");//写入文件
-            sw.Write(ThemeListOnce);//写入
-            sw.Close();//关闭写入线程
+            Dispatcher.Invoke(new Action(delegate
+            {
+                StreamWriter sw = new StreamWriter("./RE3/ThemeList.tmp");//写入文件
+                ReWrite:
+                try//尝试写入
+                {
+
+                    sw.Write(ThemeListOnce);//写入
+                    sw.Close();//关闭写入线程
+
+                }
+                catch (System.IO.IOException)
+                {
+                    Thread.Sleep(100);
+                    goto ReWrite;
+                }
+            }));
 
             FileStream fs = new FileStream("./RE3/ThemeList.tmp", FileMode.Open, FileAccess.Read);
             StreamReader sr = new StreamReader(fs);

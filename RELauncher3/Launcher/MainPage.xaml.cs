@@ -41,12 +41,14 @@ namespace RELauncher3
                 IsOnlineModeTile.Content = "离线模式";
             }
 
-            Thread checkupdate = new Thread(IfUpdate);//检查更新
-            checkupdate.IsBackground = true;
+            Thread checkupdate = new Thread(IfUpdate)
+            {
+                IsBackground = true
+            };//检查更新
             checkupdate.Start();
 
             //更改背景图片
-            string path = Settings.Default["BGPPath"].ToString();//背景图片路径
+            string path = Properties.Settings.Default["BGPPath"].ToString();//背景图片路径
             if (path != "null")//如果背景图片的路径不为无
             {
                 if (File.Exists(path))//如果背景图片 的 图片存在
