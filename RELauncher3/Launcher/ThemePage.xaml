@@ -48,7 +48,7 @@
                     <TextBlock x:Name="ColorBlock" HorizontalAlignment="Left" Margin="55,45,0,0" TextWrapping="Wrap" VerticalAlignment="Top" FontSize="18" Text="Color"/>
                     <TextBlock HorizontalAlignment="Right" VerticalAlignment="Top" FontSize="16" Margin="0,75,139,0" Text="当前使用背景"/>
                     <Grid x:Name="ExampleGrid" HorizontalAlignment="Right" Height="117" Margin="0,100,10,0" VerticalAlignment="Top" Width="225" Background="White"/>
-                    <Button x:Name="SelectPictureButton" Content="选择" Margin="0,222,10,0" Style="{StaticResource AccentedSquareButtonStyle}" BorderBrush="#CC119EDA" Background="#CC119EDA" Height="30" VerticalAlignment="Top" HorizontalAlignment="Right" Width="100" Click="SelectPictureButton_Click" IsEnabled="{Binding IsChecked, ElementName=YourPictureSwitch}"/>
+                    <Button x:Name="SelectPictureButton" Content="选择" Margin="0,222,10,0" Style="{StaticResource AccentedSquareButtonStyle}" BorderBrush="{Binding Background, ElementName=tile}" Background="{Binding Background, ElementName=tile}" Height="30" VerticalAlignment="Top" HorizontalAlignment="Right" Width="100" Click="SelectPictureButton_Click" IsEnabled="{Binding IsChecked, ElementName=YourPictureSwitch}"/>
                     <Controls:ToggleSwitch x:Name="YourPictureSwitch"
                         Header="使用自定义图片"
                         Style="{StaticResource MahApps.Metro.Styles.ToggleSwitch.Win10}"
