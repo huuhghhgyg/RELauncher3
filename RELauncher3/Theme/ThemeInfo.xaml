@@ -1,17 +1,17 @@
-﻿<UserControl
+﻿<Grid
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:Controls="http://metro.mahapps.com/winfx/xaml/controls"
              xmlns:local="clr-namespace:RELauncher3.Theme"
-             xmlns:Custom="http://metro.mahapps.com/winfx/xaml/controls" x:Class="RELauncher3.Theme.ThemeInfo"
+             xmlns:Custom="http://metro.mahapps.com/winfx/xaml/controls" x:Name="showGrid" x:Class="RELauncher3.Theme.ThemeInfo"
              mc:Ignorable="d" 
              d:DesignHeight="470" d:DesignWidth="900">
     <Grid Background="White">
         <ScrollViewer>
-            <Grid Height="645">
-                <TextBlock HorizontalAlignment="Left" VerticalAlignment="Top" Text="ThemeName" Margin="20,60,0,0" FontSize="36"/>
+            <Grid Height="680">
+                <TextBlock x:Name="ThemeNameBlock" HorizontalAlignment="Left" VerticalAlignment="Top" Text="ThemeName" Margin="125,60,0,0" FontSize="36"/>
                 <Controls:Tile x:Name="BackTile" Width="60" Height="40" HorizontalAlignment="Left" Margin="0" Foreground="{x:Null}" VerticalAlignment="Top" Click="BackTile_Click">
                     <Rectangle Fill="White" Width="20" Height="20">
                         <Rectangle.OpacityMask>
@@ -21,13 +21,15 @@
                 </Controls:Tile>
                 <TextBlock x:Name="textBlock" HorizontalAlignment="Left" Margin="73,10,0,618" TextWrapping="Wrap" FontSize="16" Text="主题"/>
 
-                <Controls:FlipView Width="600" Height="300" Margin="20,110,0,0" VerticalAlignment="Top" HorizontalAlignment="Left"/>
+                <Controls:FlipView Width="600" Height="300" Margin="20,170,0,0" VerticalAlignment="Top" HorizontalAlignment="Left"/>
                 <Button x:Name="DownloadBtn" Width="100"
                 Content="下载"
                 Style="{DynamicResource AccentedSquareButtonStyle}" Margin="0,75,50,0" HorizontalAlignment="Right" Height="31" VerticalAlignment="Top" BorderBrush="{x:Null}" />
-                <TextBlock x:Name="ThemedescribtionTitle" FontSize="25" Text="介绍" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="20,450,0,0"/>
-                <TextBlock x:Name="ThemeDescribtion" FontSize="16" Text="ThemeDescribtion" Margin="20,482,100,0" Height="153" VerticalAlignment="Top"/>
+                <TextBlock x:Name="ThemedescribtionTitle" FontSize="25" Text="介绍" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="20,480,0,0"/>
+                <TextBlock x:Name="ThemeDescribtion" FontSize="16" Text="ThemeDescribtion" Margin="20,520,100,10"/>
+                <Image x:Name="IconBox" HorizontalAlignment="Left" Height="100" Margin="20,59,0,0" VerticalAlignment="Top" Width="100"/>
+                <TextBlock x:Name="AuthorBox" HorizontalAlignment="Left" Margin="125,111,0,0" TextWrapping="Wrap" Text="Author" VerticalAlignment="Top" FontSize="20"/>
             </Grid>
         </ScrollViewer>
     </Grid>
-</UserControl>
+</Grid>

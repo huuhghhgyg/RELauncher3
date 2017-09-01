@@ -31,6 +31,7 @@ namespace RELauncher3.Launcher
         public ThemePage()//加载完后执行内容
         {
             InitializeComponent();
+
             ColorBlock.Text = MainWindow.getColorName();//获取当前颜色的名字
 
             string path = Settings.Default["BGPPath"].ToString();//背景图片路径
@@ -48,8 +49,8 @@ namespace RELauncher3.Launcher
             }
             Thread LoadItem = new Thread(AddThemeItem);
             LoadItem.Start();
-            AddThemeItem();
-            GetPictureFromURL("https://huuhghhgyg.github.io/RE3/Theme/Orginal/Icon.jpg", ExampleGrid);
+            //AddThemeItem();
+            //GetPictureFromURL("https://huuhghhgyg.github.io/RE3/Theme/Orginal/Icon.jpg", ExampleGrid);
         }
 
         void GetPictureFromURL(string URL, Grid grid)
@@ -71,6 +72,7 @@ namespace RELauncher3.Launcher
 
         void AddThemeItem()
         {
+            
             string ThemeListOnce = GetRequest("https://huuhghhgyg.github.io/RE3/Theme/ThemeList.content");
             //ThemeList.Children.Add(new Theme.ThemeItem("1", "1"));
             if (Directory.Exists("RE3") == false)//判断目录是否存在，如果不存在,
@@ -116,7 +118,7 @@ namespace RELauncher3.Launcher
             StreamReader sr = new StreamReader(fs);
             string s, ThemeName = "", ThemeDir = "", ThemeIcon = "";//顺序也为 名字 目录 Icon
             int block = 0;
-            while ((s = sr.ReadLine()) != null)
+            while ((s = sr.ReadLine()) != ";")
             {
                 block++;
                 switch (block)

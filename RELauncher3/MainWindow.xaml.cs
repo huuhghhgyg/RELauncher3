@@ -28,6 +28,7 @@ namespace RELauncher3
         public MainWindow()
         {
             InitializeComponent();
+
             //初次设置
             if (Settings.Default["UserName"].ToString() == "")//判断是否进入设置向导
             {

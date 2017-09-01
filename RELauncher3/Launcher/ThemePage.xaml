@@ -57,7 +57,7 @@
                 </Grid>
             </TabItem>
             <TabItem Header=" 主题     ">
-                <Grid Background="White" ScrollViewer.VerticalScrollBarVisibility="Auto" Margin="0">
+                <Grid x:Name="InternetThemeGrid" Background="White" ScrollViewer.VerticalScrollBarVisibility="Auto" Margin="0">
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition/>
                     </Grid.ColumnDefinitions>

@@ -22,11 +22,13 @@ namespace RELauncher3.Theme
     /// </summary>
     public partial class ThemeItem : UserControl
     {
-        public ThemeItem(string IconUrl,string title,string dir)
+        string IconURL = "";
+        public ThemeItem(string _IconUrl,string title,string dir)
         {
             InitializeComponent();
             ThemeTile.Content = title;//设置标题(主题名字)
-            GetPictureFromURL(IconUrl, Image);//设置icon
+            IconURL = _IconUrl;
+            GetPictureFromURL(_IconUrl, Image);//设置icon
         }
 
         void GetPictureFromURL(string URL,Image image)
@@ -54,6 +56,11 @@ namespace RELauncher3.Theme
 
                 image.Source = bitmap;
             }
+        }
+
+        private void ThemeTile_Click(object sender, RoutedEventArgs e)
+        {
+
         }
     }
 }
