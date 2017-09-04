@@ -70,10 +70,13 @@ namespace RELauncher3.Launcher
             }
         }
 
+        string Info = "";
+        string ThemeListOnce = "";
         void AddThemeItem()
         {
             
-            string ThemeListOnce = GetRequest("https://huuhghhgyg.github.io/RE3/Theme/ThemeList.content");
+            ThemeListOnce = GetRequest("https://huuhghhgyg.github.io/RE3/Theme/ThemeList.content");
+            /*
             //ThemeList.Children.Add(new Theme.ThemeItem("1", "1"));
             if (Directory.Exists("RE3") == false)//判断目录是否存在，如果不存在,
             {
@@ -116,32 +119,37 @@ namespace RELauncher3.Launcher
 
             FileStream fs = new FileStream("./RE3/ThemeList.tmp", FileMode.Open, FileAccess.Read);
             StreamReader sr = new StreamReader(fs);
+            
             string s, ThemeName = "", ThemeDir = "", ThemeIcon = "";//顺序也为 名字 目录 Icon
             int block = 0;
-            while ((s = sr.ReadLine()) != ";")
+            while ((s = sr.ReadLine()) != ";")*/
+            string ThemeName = "", ThemeDir = "", ThemeIcon = "";//顺序也为 名字 目录 Icon
+            while (ThemeListOnce!="")
             {
-                block++;
-                switch (block)
+                count();
+                        ThemeName = Info;
+                count();
+                        ThemeDir = "https://huuhghhgyg.github.io/RE3/Theme" + Info;
+                count();
+                        ThemeIcon = Info;
+                if (ThemeListOnce != "")//防止报错
                 {
-                    case 1:
-                        ThemeName = s;
-                        break;
-                    case 2:
-                        ThemeDir = "https://huuhghhgyg.github.io/RE3/Theme" + s;
-                        break;
-                    case 3:
-                        ThemeIcon = s;
-                        break;
-                    case 4:
-                        Dispatcher.Invoke(new Action(delegate
+                    count();
+                }
+                Dispatcher.Invoke(new Action(delegate
                         {
                             ThemeList.Children.Add(new Theme.ThemeItem(ThemeIcon, ThemeName, ThemeDir));
                         }));
-                        block = 0;
-                        break;
-                }
+
+
                 //MSGBox.Text += s + "\n";
             }
+        }
+
+        void count()
+        {
+            Info = ThemeListOnce.Substring(0, ThemeListOnce.IndexOf("\n"));
+            ThemeListOnce = ThemeListOnce.Substring(ThemeListOnce.IndexOf("\n")+1);
         }
 
         static string GetRequest(string URL)//用于获取主题列表
