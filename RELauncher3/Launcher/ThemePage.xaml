@@ -61,7 +61,7 @@
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition/>
                     </Grid.ColumnDefinitions>
-                    <ScrollViewer Margin="0" Background="White">
+                    <ScrollViewer Margin="0" Background="#FFF0F0F0">
                         <WrapPanel x:Name="ThemeList" ScrollViewer.VerticalScrollBarVisibility="Disabled">
                         </WrapPanel>
                     </ScrollViewer>

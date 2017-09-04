@@ -8,9 +8,9 @@
              mc:Ignorable="d" 
              d:DesignHeight="250" d:DesignWidth="200" HorizontalContentAlignment="Center" VerticalContentAlignment="Center"
              HorizontalAlignment="Left" VerticalAlignment="Top" Margin="40,20,0,0">
-    <Grid Background="White">
-        <Controls:ProgressRing Width="40" Height="40" Margin="80,105,80,0" VerticalAlignment="Top"/>
-        <Controls:Tile x:Name="ThemeTile" Margin="0,190,0,0" Height="60" Width="Auto" Content="Title" VerticalContentAlignment="Bottom" HorizontalContentAlignment="Center" Click="ThemeTile_Click"/>
-        <Image x:Name="Image" Margin="0,0,0,60" Height="190"/>
-    </Grid>
+        <Grid Background="#FFE6E6E6">
+            <Controls:ProgressRing Width="40" Height="40" Margin="80,105,80,0" VerticalAlignment="Top"/>
+            <Controls:Tile x:Name="ThemeTile" Margin="0,190,0,0" Height="60" Width="Auto" Content="Title" VerticalContentAlignment="Bottom" HorizontalContentAlignment="Center" Click="ThemeTile_Click" Background="White" Foreground="Black" FontWeight="Bold" FontSize="14"/>
+            <Image x:Name="Image" Margin="0,0,0,60" Height="190" OpacityMask="Black"/>
+        </Grid>
 </UserControl>

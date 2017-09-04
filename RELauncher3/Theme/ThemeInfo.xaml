@@ -9,26 +9,28 @@
              mc:Ignorable="d" 
              d:DesignHeight="470" d:DesignWidth="900">
     <Grid Background="White">
-        <ScrollViewer>
-            <Grid Height="680">
-                <TextBlock x:Name="ThemeNameBlock" HorizontalAlignment="Left" VerticalAlignment="Top" Text="ThemeName" Margin="125,60,0,0" FontSize="36"/>
-                <Controls:Tile x:Name="BackTile" Width="60" Height="40" HorizontalAlignment="Left" Margin="0" Foreground="{x:Null}" VerticalAlignment="Top" Click="BackTile_Click">
-                    <Rectangle Fill="White" Width="20" Height="20">
-                        <Rectangle.OpacityMask>
-                            <VisualBrush Visual="{StaticResource appbar_arrow_left}" Stretch="Uniform" />
-                        </Rectangle.OpacityMask>
-                    </Rectangle>
-                </Controls:Tile>
-                <TextBlock x:Name="textBlock" HorizontalAlignment="Left" Margin="73,10,0,618" TextWrapping="Wrap" FontSize="16" Text="主题"/>
+        <Grid Width="900" Height="40" VerticalAlignment="Top" Background="White">
+            <Controls:Tile x:Name="BackTile" Width="60" Height="40" HorizontalAlignment="Left" Margin="0" Foreground="{x:Null}" VerticalAlignment="Top" Click="BackTile_Click">
+                <Rectangle Fill="White" Width="20" Height="20">
+                    <Rectangle.OpacityMask>
+                        <VisualBrush Visual="{StaticResource appbar_arrow_left}" Stretch="Uniform" />
+                    </Rectangle.OpacityMask>
+                </Rectangle>
+            </Controls:Tile>
+            <TextBlock HorizontalAlignment="Left" Margin="73,10,0,0" TextWrapping="Wrap" Text="设置" VerticalAlignment="Top" FontSize="16"/>
+        </Grid>
 
-                <Controls:FlipView Width="600" Height="300" Margin="20,170,0,0" VerticalAlignment="Top" HorizontalAlignment="Left"/>
+        <ScrollViewer Margin="0,40,0,0">
+            <Grid Height="650">
+                <TextBlock x:Name="ThemeNameBlock" HorizontalAlignment="Left" VerticalAlignment="Top" Text="ThemeName" Margin="130,40,0,0" FontSize="36"/>
+                <Controls:FlipView x:Name="PictureFlipView" Width="600" Height="300" Margin="20,140,0,0" VerticalAlignment="Top" HorizontalAlignment="Left"/>
                 <Button x:Name="DownloadBtn" Width="100"
-                Content="下载"
-                Style="{DynamicResource AccentedSquareButtonStyle}" Margin="0,75,50,0" HorizontalAlignment="Right" Height="31" VerticalAlignment="Top" BorderBrush="{x:Null}" />
-                <TextBlock x:Name="ThemedescribtionTitle" FontSize="25" Text="介绍" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="20,480,0,0"/>
-                <TextBlock x:Name="ThemeDescribtion" FontSize="16" Text="ThemeDescribtion" Margin="20,520,100,10"/>
-                <Image x:Name="IconBox" HorizontalAlignment="Left" Height="100" Margin="20,59,0,0" VerticalAlignment="Top" Width="100"/>
-                <TextBlock x:Name="AuthorBox" HorizontalAlignment="Left" Margin="125,111,0,0" TextWrapping="Wrap" Text="Author" VerticalAlignment="Top" FontSize="20"/>
+                Content="应用"
+                Style="{DynamicResource AccentedSquareButtonStyle}" Margin="0,45,50,0" HorizontalAlignment="Right" Height="31" VerticalAlignment="Top" BorderBrush="{x:Null}" />
+                <TextBlock x:Name="ThemedescribtionTitle" FontSize="25" Text="介绍" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="20,450,0,0"/>
+                <TextBlock x:Name="ThemeDescribtion" FontSize="16" Text="ThemeDescribtion" Margin="20,490,100,10"/>
+                <Image x:Name="IconBox" HorizontalAlignment="Left" Height="100" Margin="20,30,0,0" VerticalAlignment="Top" Width="100"/>
+                <TextBlock x:Name="AuthorBox" HorizontalAlignment="Left" Margin="130,90,0,0" TextWrapping="Wrap" Text="Author" VerticalAlignment="Top" FontSize="20"/>
             </Grid>
         </ScrollViewer>
     </Grid>

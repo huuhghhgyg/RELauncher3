@@ -17,6 +17,7 @@ using System.Windows.Navigation;
 using System.Windows.Shapes;
 using MahApps.Metro.Controls.Dialogs;
 using RELauncher3.Properties;
+using System.Threading;
 
 namespace RELauncher3
 {
@@ -48,6 +49,7 @@ namespace RELauncher3
                 showGrid.Children.Clear();
                 showGrid.Children.Add(grid);
             }
+            UpdateGridHelper();//异步切换(稍慢),取决于设置的延迟
         }
 
         public static void changeColor(string Color, string bgColor)//Color:“Red”, “Green”, “Blue”, “Purple”, “Orange”, “Lime”, “Emerald”, “Teal”, “Cyan”, “Cobalt”, “Indigo”, “Violet”, “Pink”, “Magenta”, “Crimson”, “Amber”, “Yellow”, “Brown”, “Olive”, “Steel”, “Mauve”, “Taupe”, “Sienna”;bgcolor:“BaseLight”, “BaseDark"
@@ -72,19 +74,21 @@ namespace RELauncher3
             Environment.Exit(0);
         }
 
-        /*public async Task<string> showMessageMSG(string title, string message)
+        public static Grid grid;
+        Grid SyncGrid;
+        async void UpdateGridHelper()//更新Grid
         {
-            rest:
-            string result = await this.ShowInputAsync(title, message);
-            if (result == null) //user pressed cancel
+            while (true)
             {
-                await this.ShowMessageAsync("提示", "输入值为空，重新输入");
-                goto rest;
+                await Task.Run(() => Thread.Sleep(100));
+                if (grid != SyncGrid)
+                {
+                    SyncGrid = grid;
+                    showGrid.Children.Clear();
+                    showGrid.Children.Add(SyncGrid);
+                }
+                await Task.Delay(100);
             }
-            else
-            {
-                return result;
-            }
-        }*/
+        }
     }
 }

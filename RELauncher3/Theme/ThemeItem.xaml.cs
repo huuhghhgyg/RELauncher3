@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Net;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
@@ -23,19 +24,22 @@ namespace RELauncher3.Theme
     public partial class ThemeItem : UserControl
     {
         string IconURL = "";
+        string dirURL = "";
         public ThemeItem(string _IconUrl,string title,string dir)
         {
             InitializeComponent();
             ThemeTile.Content = title;//设置标题(主题名字)
             IconURL = _IconUrl;
+            dirURL = dir;
             GetPictureFromURL(_IconUrl, Image);//设置icon
         }
 
-        void GetPictureFromURL(string URL,Image image)
+        async void GetPictureFromURL(string URL,Image image)
         {
+            await Task.Run(() => Thread.Sleep(0));
             var request = WebRequest.Create(URL);
 
-            using (var response = request.GetResponse())
+            using (var response = await request.GetResponseAsync())
             using (var stream = response.GetResponseStream())
             {
                 //var imgBrush = new ImageBrush();
@@ -56,11 +60,13 @@ namespace RELauncher3.Theme
 
                 image.Source = bitmap;
             }
+            await Task.Delay(0);
         }
 
         private void ThemeTile_Click(object sender, RoutedEventArgs e)
         {
-
+            //MainWindow.grid = new Launcher.settings();
+            MainWindow.grid = new ThemeInfo(ThemeTile.Content.ToString(), dirURL);
         }
     }
 }
