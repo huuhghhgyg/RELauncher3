@@ -32,6 +32,15 @@ namespace RELauncher3.Launcher
         {
             InitializeComponent();
 
+            Thread LoadItem = new Thread(AddThemeItem);
+            LoadItem.Start();
+            //AddThemeItem();
+            //GetPictureFromURL("https://huuhghhgyg.github.io/RE3/Theme/Orginal/Icon.jpg", ExampleGrid);
+            LoadSettings();//读取设置
+        }
+
+        void LoadSettings()//读取设置
+        {
             ColorBlock.Text = MainWindow.getColorName();//获取当前颜色的名字
 
             string path = Settings.Default["BGPPath"].ToString();//背景图片路径
@@ -47,10 +56,8 @@ namespace RELauncher3.Launcher
             {
                 YourPictureSwitch.IsChecked = true;//switch改为开启（默认关闭）
             }
-            Thread LoadItem = new Thread(AddThemeItem);
-            LoadItem.Start();
-            //AddThemeItem();
-            //GetPictureFromURL("https://huuhghhgyg.github.io/RE3/Theme/Orginal/Icon.jpg", ExampleGrid);
+
+            StartBoxIsBlack.IsChecked = bool.Parse(Settings.Default["StartBoxIsBlack"].ToString());//读取“开始”二字颜色
         }
 
         void GetPictureFromURL(string URL, Grid grid)
@@ -74,64 +81,17 @@ namespace RELauncher3.Launcher
         string ThemeListOnce = "";
         void AddThemeItem()
         {
-            
+
             ThemeListOnce = GetRequest("https://huuhghhgyg.github.io/RE3/Theme/ThemeList.content");
-            /*
-            //ThemeList.Children.Add(new Theme.ThemeItem("1", "1"));
-            if (Directory.Exists("RE3") == false)//判断目录是否存在，如果不存在,
-            {
-                Directory.CreateDirectory("RE3");//创建目录
-            }
-            if (File.Exists("./RE3/ThemeList.tmp") == true)//如果指定tmp文件存在
-            {
-            ReDelete://标签
-                try//尝试删除
-                {
-                    Dispatcher.Invoke(new Action(delegate
-                    {
-                        File.Delete("./RE3/ThemeList.tmp");//删除指定tmp文件
-                    }));
-                }
-                catch (System.IO.IOException)//删除失败，文件被其他线程占用
-                {
-                    Thread.Sleep(100);
-                    goto ReDelete;//回到再次删除
-                }
-            }
-
-            Dispatcher.Invoke(new Action(delegate
-            {
-                StreamWriter sw = new StreamWriter("./RE3/ThemeList.tmp");//写入文件
-                ReWrite:
-                try//尝试写入
-                {
-
-                    sw.Write(ThemeListOnce);//写入
-                    sw.Close();//关闭写入线程
-
-                }
-                catch (System.IO.IOException)
-                {
-                    Thread.Sleep(100);
-                    goto ReWrite;
-                }
-            }));
-
-            FileStream fs = new FileStream("./RE3/ThemeList.tmp", FileMode.Open, FileAccess.Read);
-            StreamReader sr = new StreamReader(fs);
-            
-            string s, ThemeName = "", ThemeDir = "", ThemeIcon = "";//顺序也为 名字 目录 Icon
-            int block = 0;
-            while ((s = sr.ReadLine()) != ";")*/
             string ThemeName = "", ThemeDir = "", ThemeIcon = "";//顺序也为 名字 目录 Icon
-            while (ThemeListOnce!="")
+            while (ThemeListOnce != "")
             {
                 count();
-                        ThemeName = Info;
+                ThemeName = Info;
                 count();
-                        ThemeDir = "https://huuhghhgyg.github.io/RE3/Theme" + Info;
+                ThemeDir = "https://huuhghhgyg.github.io/RE3/Theme" + Info;
                 count();
-                        ThemeIcon = Info;
+                ThemeIcon = Info;
                 if (ThemeListOnce != "")//防止报错
                 {
                     count();
@@ -141,7 +101,6 @@ namespace RELauncher3.Launcher
                             ThemeList.Children.Add(new Theme.ThemeItem(ThemeIcon, ThemeName, ThemeDir));
                         }));
 
-
                 //MSGBox.Text += s + "\n";
             }
         }
@@ -149,7 +108,7 @@ namespace RELauncher3.Launcher
         void count()
         {
             Info = ThemeListOnce.Substring(0, ThemeListOnce.IndexOf("\n"));
-            ThemeListOnce = ThemeListOnce.Substring(ThemeListOnce.IndexOf("\n")+1);
+            ThemeListOnce = ThemeListOnce.Substring(ThemeListOnce.IndexOf("\n") + 1);
         }
 
         static string GetRequest(string URL)//用于获取主题列表
@@ -307,29 +266,15 @@ namespace RELauncher3.Launcher
             OpenFileDialog dialog = new OpenFileDialog();//打开选择文件对话框
             dialog.Filter = "PNG图片|*.png|JPG图片|*.jpg";//可选择png或者jpg文件
 
-            if (dialog.ShowDialog() == true)
+            if (dialog.ShowDialog() == true)//如果对话框返回了路径
             {
-                //ChangeBackground(dialog.FileName);
                 string filename = dialog.FileName;
-                if (filename != "./BG.png" && File.Exists("BG.png") || filename != "./BG.jpg" && File.Exists("BG.jpg"))
-                {//删除重复的文件
-                    File.Delete("BG.jpg");//删除jpg
-                    File.Delete("BG.png");//删除png
-                }
-
-                if (filename.Substring(filename.Length - 3, 3) == "png")//文件类型分类
-                {//PNG文件
-                    File.Copy(dialog.FileName, "./BG.png");
-                    ChangeBackground("./BG.png");
-                    Settings.Default["BGPPath"] = "./BG.png";
-                }
-                else//JPG文件或其他
+                if (File.Exists(filename))//如果指定目录文件存在
                 {
-                    File.Copy(dialog.FileName, "./BG.png");
-                    ChangeBackground("./BG.png");
-                    Settings.Default["BGPPath"] = "./BG.jpg";
+                    ChangeBackground(filename);//更换背景图片
+                    Settings.Default["BGPPath"] = filename;//设置背景图片路径
+                    Settings.Default.Save();//保存路径
                 }
-                Settings.Default.Save();//保存设置
             }
         }
 
@@ -340,6 +285,12 @@ namespace RELauncher3.Launcher
                 Settings.Default["BGPPath"] = "null";
                 Settings.Default.Save();
             }
+        }
+
+        private void StartBoxIsBlack_Click(object sender, RoutedEventArgs e)
+        {
+            Settings.Default["StartBoxIsBlack"] = StartBoxIsBlack.IsChecked;
+            Settings.Default.Save();
         }
     }
 }

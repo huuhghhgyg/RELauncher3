@@ -8,8 +8,11 @@
       xmlns:Controls="http://metro.mahapps.com/winfx/xaml/controls"
       mc:Ignorable="d" 
       d:DesignHeight="470" d:DesignWidth="900" Background="White">
+    <Grid.ColumnDefinitions>
+        <ColumnDefinition/>
+    </Grid.ColumnDefinitions>
 
-    <TextBlock x:Name="textBlock" HorizontalAlignment="Left" Margin="30,30,0,0" TextWrapping="Wrap" Text="开始" VerticalAlignment="Top" FontSize="40"/>
+    <TextBlock x:Name="StartBox" HorizontalAlignment="Left" Margin="30,30,0,0" TextWrapping="Wrap" Text="开始" VerticalAlignment="Top" FontSize="40" FontFamily="Microsoft YaHei"/>
     <ScrollViewer HorizontalScrollBarVisibility="Visible" Margin="0,100,0,0" VerticalScrollBarVisibility="Auto">
         <ScrollViewer.Background>
             <ImageBrush/>

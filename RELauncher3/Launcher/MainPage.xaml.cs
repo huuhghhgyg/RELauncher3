@@ -31,8 +31,25 @@ namespace RELauncher3
         {
             InitializeComponent();
 
+            SetMainPageUI();
+
+            Thread checkupdate = new Thread(IfUpdate)
+            {
+                IsBackground = true
+            };//检查更新
+            checkupdate.Start();
+
+            //string URL="http://huuhghhgyg.github.io/BGM/LifeInTheFastLane.mp3";
+            //MediaPlayer player = new MediaPlayer();
+            //player.Stop();
+            //Uri uriStreaming = new Uri(URL);
+            //player.Play();
+        }
+
+        void SetMainPageUI()
+        {
             UserNameTile.Content = Settings.Default["UserName"].ToString();//磁块上显示用户名
-            if (bool.Parse(Settings.Default["OnlineAccount"].ToString())==true)//磁块显示验证模式
+            if (bool.Parse(Settings.Default["OnlineAccount"].ToString()) == true)//磁块显示验证模式
             {
                 IsOnlineModeTile.Content = "在线模式";
             }
@@ -41,14 +58,8 @@ namespace RELauncher3
                 IsOnlineModeTile.Content = "离线模式";
             }
 
-            Thread checkupdate = new Thread(IfUpdate)
-            {
-                IsBackground = true
-            };//检查更新
-            checkupdate.Start();
-
             //更改背景图片
-            string path = Properties.Settings.Default["BGPPath"].ToString();//背景图片路径
+            string path = Settings.Default["BGPPath"].ToString();//背景图片路径
             if (path != "null")//如果背景图片的路径不为无
             {
                 if (File.Exists(path))//如果背景图片 的 图片存在
@@ -57,11 +68,15 @@ namespace RELauncher3
                 }
             }
 
-            //string URL="http://huuhghhgyg.github.io/BGM/LifeInTheFastLane.mp3";
-            //MediaPlayer player = new MediaPlayer();
-            //player.Stop();
-            //Uri uriStreaming = new Uri(URL);
-            //player.Play();
+            bool IfStartBoxIsBlack= bool.Parse((Settings.Default["StartBoxIsBlack"].ToString()));//“开始”二字颜色是黑还是白？
+            if (IfStartBoxIsBlack == false)
+            {
+                StartBox.Foreground = Brushes.White;//开始 变白
+                if (path == "null" || File.Exists(path)==false)
+                {
+                    showGrid.Background = Brushes.Black;
+                }
+            }
         }
 
         void ChangeBackground(string Path)//更改主页背景

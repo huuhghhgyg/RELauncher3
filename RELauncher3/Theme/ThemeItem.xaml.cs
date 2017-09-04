@@ -28,6 +28,7 @@ namespace RELauncher3.Theme
         public ThemeItem(string _IconUrl,string title,string dir)
         {
             InitializeComponent();
+
             ThemeTile.Content = title;//设置标题(主题名字)
             IconURL = _IconUrl;
             dirURL = dir;
