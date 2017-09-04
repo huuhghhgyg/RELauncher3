@@ -28,7 +28,7 @@ namespace RELauncher3.start
         public startPage1()
         {
             InitializeComponent();
-            quesBlock.Text = "我们将以" + System.Environment.UserName + "的用户名登录游戏";
+            quesBlock.Text = "您将以" + System.Environment.UserName + "的用户名登录游戏";
             usrNameblk.Text = System.Environment.UserName;
         }
 

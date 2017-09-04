@@ -60,19 +60,16 @@ namespace RELauncher3
 
             //更改背景图片
             string path = Settings.Default["BGPPath"].ToString();//背景图片路径
-            if (path != "null")//如果背景图片的路径不为无
+            if (path != "null" && File.Exists(path))//如果背景图片的路径不为无 并且 背景图片 的 图片文件存在
             {
-                if (File.Exists(path))//如果背景图片 的 图片存在
-                {
-                    ChangeBackground(path);
-                }
+                ChangeBackground(path);//更改背景
             }
 
-            bool IfStartBoxIsBlack= bool.Parse((Settings.Default["StartBoxIsBlack"].ToString()));//“开始”二字颜色是黑还是白？
+            bool IfStartBoxIsBlack = bool.Parse((Settings.Default["StartBoxIsBlack"].ToString()));//“开始”二字颜色是黑还是白？
             if (IfStartBoxIsBlack == false)
             {
                 StartBox.Foreground = Brushes.White;//开始 变白
-                if (path == "null" || File.Exists(path)==false)
+                if (path == "null" || File.Exists(path) == false)
                 {
                     showGrid.Background = Brushes.Black;
                 }
@@ -109,7 +106,7 @@ namespace RELauncher3
                     }));
                 }
             }
-            catch{}
+            catch { }
         }
 
         private void SettingTile_Click(object sender, RoutedEventArgs e)
