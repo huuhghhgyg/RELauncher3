@@ -33,10 +33,11 @@ namespace RELauncher3.Launcher
             {
                 ListBoxVersion.SelectedIndex = 0;
                 FillInfo();
+                ListEmpty.Visibility = Visibility.Hidden;
             }
             else
             {
-
+                ListEmpty.Visibility = Visibility.Visible;
             }
         }
 

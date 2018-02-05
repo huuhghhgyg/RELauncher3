@@ -18,6 +18,14 @@
         </Controls:Tile>
         <TextBlock x:Name="textBlock" HorizontalAlignment="Left" Margin="73,10,0,440" TextWrapping="Wrap" FontSize="16"><Run Text="Minecraft"/><Run Text="版本列表"/></TextBlock>
         <ListBox x:Name="ListBoxVersion" ScrollViewer.HorizontalScrollBarVisibility="Auto" ScrollViewer.VerticalScrollBarVisibility="Visible" Margin="0,80,530,0" MouseLeftButtonUp="ListBoxVersion_MouseLeftButtonUp"/>
+        <Grid x:Name="ListEmpty" HorizontalAlignment="Left" Margin="0,75,0,0" Width="370" Visibility="Hidden">
+            <Rectangle Width="50" Height="50" Fill="#FF6B6B6B" Margin="0,-40,0,0">
+                <Rectangle.OpacityMask>
+                    <VisualBrush Visual="{StaticResource appbar_smiley_tounge}" Stretch="Uniform" />
+                </Rectangle.OpacityMask>
+            </Rectangle>
+            <TextBlock TextWrapping="Wrap" Text="这里似乎什么也没有" Foreground="#FF6B6B6B" FontSize="16" FontWeight="Bold" Margin="0,50,0,0" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+        </Grid>
         <TextBlock HorizontalAlignment="Left" Margin="10,55,0,0" TextWrapping="Wrap" Text="版本" VerticalAlignment="Top" FontSize="16" FontWeight="Bold"/>
         <TextBlock HorizontalAlignment="Left" Margin="400,55,0,0" TextWrapping="Wrap" Text="详细信息" VerticalAlignment="Top" FontSize="16" FontWeight="Bold"/>
         <Grid Height="200" Margin="400,80,100,0" VerticalAlignment="Top">
