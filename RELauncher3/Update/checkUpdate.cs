@@ -9,7 +9,7 @@ namespace RELauncher3.Update
 {
     class checkUpdate
     {
-        protected static int _ver = 0;//软件版本 !!!
+        protected static int _ver = 1;//软件版本 !!!
 
         public static int Ver//只读访问器
         {
