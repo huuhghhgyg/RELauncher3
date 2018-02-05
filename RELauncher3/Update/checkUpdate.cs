@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net;
 using System.Text;
 using System.Threading.Tasks;
 using System.Xml;
@@ -9,7 +10,7 @@ namespace RELauncher3.Update
 {
     class checkUpdate
     {
-        protected static int _ver = 1;//软件版本 !!!
+        protected static int _ver = 2;//软件版本 !!!
 
         public static int Ver//只读访问器
         {
@@ -47,6 +48,8 @@ namespace RELauncher3.Update
 
         public void checkVer(string url)
         {
+            ServicePointManager.SecurityProtocol = SecurityProtocolType.Ssl3;
+            System.Net.ServicePointManager.SecurityProtocol = SecurityProtocolType.Tls12;
             XmlDocument doc = new XmlDocument();
             doc.Load(url);
             XmlNode config = doc.SelectSingleNode("Config");

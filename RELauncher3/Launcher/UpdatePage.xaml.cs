@@ -48,7 +48,11 @@ namespace RELauncher3.Launcher
         {
             try
             {
-                downloadBar.Visibility = Visibility.Visible;
+                Dispatcher.Invoke(new Action(delegate
+                {
+                    downloadBar.Visibility = Visibility.Visible;
+                }));//更新进度条显示状态
+
                 checkUpdate update = new checkUpdate();
                 update.checkVer("https://huuhghhgyg.github.io/checkUpdate/Launcher3.up");//给出访问地址
 
