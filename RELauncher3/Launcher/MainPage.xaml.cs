@@ -19,6 +19,8 @@ using System.Diagnostics;
 using System.Windows.Media.Animation;
 using System.IO;
 using RELauncher3.Properties;
+using System.Net;
+using GetBingWallpaper;
 
 namespace RELauncher3
 {
@@ -46,6 +48,52 @@ namespace RELauncher3
             //player.Play();
         }
 
+        async void GetPictureFromURL(string URL, Image image)
+        {
+            await Task.Run(() => Thread.Sleep(0));
+            var request = WebRequest.Create(URL);
+            int ErrorNum = 0, AllErrorNum = 0;
+
+            RETRY:
+            try
+            {
+                using (var response = await request.GetResponseAsync())
+                using (var stream = response.GetResponseStream())
+                {
+
+                    //var imgBrush = new ImageBrush();
+                    //var bitmap = new BitmapImage();
+                    //bitmap.BeginInit();//开始设置属性
+                    //bitmap.StreamSource = stream;
+                    //bitmap.EndInit();//终止设置属性
+                    //imgBrush.ImageSource = bitmap;
+                    //grid.Background = imgBrush;
+
+                    //image = new Image();
+
+                    var fullFilePath = @URL;
+
+                    BitmapImage bitmap = new BitmapImage();
+                    bitmap.BeginInit();
+                    bitmap.UriSource = new Uri(fullFilePath, UriKind.Absolute);
+                    bitmap.EndInit();
+
+                    image.Source = bitmap;
+                }
+            }
+            catch (System.IO.IOException)
+            {
+                if (AllErrorNum <= 3)//错误次数小于三次
+                {
+                    ErrorNum++;//记录
+                    await Task.Delay(100);//停止100ms
+                    goto RETRY;//重试
+                }
+            }
+            await Task.Delay(0);
+        }
+
+        string url;
         void SetMainPageUI()
         {
             UserNameTile.Content = Settings.Default["UserName"].ToString();//磁块上显示用户名
@@ -56,6 +104,22 @@ namespace RELauncher3
             else
             {
                 IsOnlineModeTile.Content = "离线模式";
+            }
+            //Bing每日图片
+            if (bool.Parse(Settings.Default["BingDaily"].ToString()) == true)
+            {
+                GetWallPaper WallPaperGetter = new GetWallPaper();
+                if (File.Exists(WallPaperGetter.SavePath) != true)
+                {
+                    Dispatcher.Invoke(new Action(delegate
+                    {
+                        WallPaperGetter.GetWallPaperUrl();
+                        url = "https://" + WallPaperGetter.WallPaperUrl;
+                        WallPaperGetter.DownloadFile();
+                        Settings.Default["BGPPath"] = WallPaperGetter.SavePath;//设置背景图片路径
+                        Settings.Default.Save();//保存路径
+                    }));
+                }
             }
 
             //更改背景图片

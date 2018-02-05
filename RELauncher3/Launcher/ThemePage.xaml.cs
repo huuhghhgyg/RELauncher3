@@ -20,6 +20,7 @@ using System.Net.Http;
 using System.Net;
 using System.Drawing;
 using System.Threading;
+using GetBingWallpaper;
 
 namespace RELauncher3.Launcher
 {
@@ -32,8 +33,9 @@ namespace RELauncher3.Launcher
         {
             InitializeComponent();
 
-            Thread LoadItem = new Thread(AddThemeItem);
-            LoadItem.Start();
+            //Thread LoadItem = new Thread(AddThemeItem);
+            //LoadItem.Start();
+
             //AddThemeItem();
             //GetPictureFromURL("https://huuhghhgyg.github.io/RE3/Theme/Orginal/Icon.jpg", ExampleGrid);
             LoadSettings();//读取设置
@@ -56,7 +58,7 @@ namespace RELauncher3.Launcher
             {
                 YourPictureSwitch.IsChecked = true;//switch改为开启（默认关闭）
             }
-
+            BingDaily.IsChecked = bool.Parse(Settings.Default["BingDaily"].ToString());
             StartBoxIsBlack.IsChecked = bool.Parse(Settings.Default["StartBoxIsBlack"].ToString());//读取“开始”二字颜色
         }
 
@@ -81,7 +83,6 @@ namespace RELauncher3.Launcher
         string ThemeListOnce = "";
         void AddThemeItem()
         {
-
             ThemeListOnce = GetRequest("https://huuhghhgyg.github.io/RE3/Theme/ThemeList.content");
             string ThemeName = "", ThemeDir = "", ThemeIcon = "";//顺序也为 名字 目录 Icon
             while (ThemeListOnce != "")
@@ -113,6 +114,7 @@ namespace RELauncher3.Launcher
 
         static string GetRequest(string URL)//用于获取主题列表
         {
+
             var request = (HttpWebRequest)WebRequest.Create(URL);
             var response = (HttpWebResponse)request.GetResponse();
             var responseString = new StreamReader(response.GetResponseStream()).ReadToEnd();
@@ -291,6 +293,22 @@ namespace RELauncher3.Launcher
         {
             Settings.Default["StartBoxIsBlack"] = StartBoxIsBlack.IsChecked;
             Settings.Default.Save();
+        }
+
+        private void BingDaily_Click(object sender, RoutedEventArgs e)
+        {
+            GetWallPaper WallPaperGetter = new GetWallPaper();
+            if (BingDaily.IsChecked == false)
+            {
+                Settings.Default["BingDaily"] = false;
+                Settings.Default.Save();
+            }
+            else
+            {
+                Settings.Default["BingDaily"] = true;
+                Settings.Default["BGPPath"] = WallPaperGetter.SavePath;
+                Settings.Default.Save();
+            }
         }
     }
 }

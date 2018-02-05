@@ -35,6 +35,7 @@ namespace RELauncher3.Launcher
 
             UpdateBtn.Visibility = Visibility.Hidden;//隐藏更新按钮
             loadBar.Visibility = Visibility.Visible;//显示load条
+            downloadBar.Visibility = Visibility.Hidden;//隐藏进度条
 
             Thread CU = new Thread(CheckUpdate);//创建新线程检测更新
             CU.Start();//开始线程
@@ -47,6 +48,7 @@ namespace RELauncher3.Launcher
         {
             try
             {
+                downloadBar.Visibility = Visibility.Visible;
                 checkUpdate update = new checkUpdate();
                 update.checkVer("https://huuhghhgyg.github.io/checkUpdate/Launcher3.up");//给出访问地址
 

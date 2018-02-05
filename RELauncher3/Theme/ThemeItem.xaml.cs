@@ -25,7 +25,7 @@ namespace RELauncher3.Theme
     {
         string IconURL = "";
         string dirURL = "";
-        public ThemeItem(string _IconUrl,string title,string dir)
+        public ThemeItem(string _IconUrl, string title, string dir)
         {
             InitializeComponent();
 
@@ -35,33 +35,50 @@ namespace RELauncher3.Theme
             GetPictureFromURL(_IconUrl, Image);//设置icon
         }
 
-        async void GetPictureFromURL(string URL,Image image)
+        async void GetPictureFromURL(string URL, Image image)
         {
             await Task.Run(() => Thread.Sleep(0));
             var request = WebRequest.Create(URL);
+            int ErrorNum = 0, AllErrorNum = 0;
 
-            using (var response = await request.GetResponseAsync())
-            using (var stream = response.GetResponseStream())
+            RETRY:
+            try
             {
-                //var imgBrush = new ImageBrush();
-                //var bitmap = new BitmapImage();
-                //bitmap.BeginInit();//开始设置属性
-                //bitmap.StreamSource = stream;
-                //bitmap.EndInit();//终止设置属性
-                //imgBrush.ImageSource = bitmap;
-                //grid.Background = imgBrush;
+                using (var response = await request.GetResponseAsync())
+                using (var stream = response.GetResponseStream())
+                {
 
-                //image = new Image();
-                var fullFilePath = @URL;
+                    //var imgBrush = new ImageBrush();
+                    //var bitmap = new BitmapImage();
+                    //bitmap.BeginInit();//开始设置属性
+                    //bitmap.StreamSource = stream;
+                    //bitmap.EndInit();//终止设置属性
+                    //imgBrush.ImageSource = bitmap;
+                    //grid.Background = imgBrush;
 
-                BitmapImage bitmap = new BitmapImage();
-                bitmap.BeginInit();
-                bitmap.UriSource = new Uri(fullFilePath, UriKind.Absolute);
-                bitmap.EndInit();
+                    //image = new Image();
 
-                image.Source = bitmap;
+                    var fullFilePath = @URL;
+
+                    BitmapImage bitmap = new BitmapImage();
+                    bitmap.BeginInit();
+                    bitmap.UriSource = new Uri(fullFilePath, UriKind.Absolute);
+                    bitmap.EndInit();
+
+                    image.Source = bitmap;
+                }
+            }
+            catch (System.IO.IOException)
+            {
+                if (AllErrorNum <= 3)//错误次数小于三次
+                {
+                    ErrorNum++;//记录
+                    await Task.Delay(100);//停止100ms
+                    goto RETRY;//重试
+                }
             }
             await Task.Delay(0);
+            ProgressRing.Visibility = Visibility.Hidden;
         }
 
         private void ThemeTile_Click(object sender, RoutedEventArgs e)

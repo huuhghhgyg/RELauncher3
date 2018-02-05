@@ -13,7 +13,7 @@
     </Grid.ColumnDefinitions>
 
     <TextBlock x:Name="StartBox" HorizontalAlignment="Left" Margin="30,30,0,0" TextWrapping="Wrap" Text="开始" VerticalAlignment="Top" FontSize="40" FontFamily="Microsoft YaHei"/>
-    <ScrollViewer HorizontalScrollBarVisibility="Visible" Margin="0,100,0,0" VerticalScrollBarVisibility="Auto">
+    <ScrollViewer HorizontalScrollBarVisibility="Visible" Margin="0,100,0,0" VerticalScrollBarVisibility="Disabled" Controls:ScrollBarHelper.VerticalScrollBarOnLeftSide="True" CanContentScroll="True">
         <ScrollViewer.Background>
             <ImageBrush/>
         </ScrollViewer.Background>

@@ -24,9 +24,9 @@
             <Grid Height="650">
                 <TextBlock x:Name="ThemeNameBlock" HorizontalAlignment="Left" VerticalAlignment="Top" Text="ThemeName" Margin="130,40,0,0" FontSize="36"/>
                 <Controls:FlipView x:Name="PictureFlipView" Width="600" Height="300" Margin="20,140,0,0" VerticalAlignment="Top" HorizontalAlignment="Left"/>
-                <Button x:Name="DownloadBtn" Width="100"
+                <Button x:Name="InstallBtn" Width="100"
                 Content="应用"
-                Style="{DynamicResource AccentedSquareButtonStyle}" Margin="0,45,50,0" HorizontalAlignment="Right" Height="31" VerticalAlignment="Top" BorderBrush="{x:Null}" />
+                Style="{DynamicResource AccentedSquareButtonStyle}" Margin="0,45,50,0" HorizontalAlignment="Right" Height="31" VerticalAlignment="Top" BorderBrush="{x:Null}" Click="InstallBtn_Click" />
                 <TextBlock x:Name="ThemedescribtionTitle" FontSize="25" Text="介绍" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="20,450,0,0"/>
                 <TextBlock x:Name="ThemeDescribtion" FontSize="16" Text="ThemeDescribtion" Margin="20,490,100,10"/>
                 <Image x:Name="IconBox" HorizontalAlignment="Left" Height="100" Margin="20,30,0,0" VerticalAlignment="Top" Width="100"/>

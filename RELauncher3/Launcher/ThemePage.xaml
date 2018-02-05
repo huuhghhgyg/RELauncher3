@@ -59,6 +59,11 @@
                         Style="{StaticResource MahApps.Metro.Styles.ToggleSwitch.Win10}"
                         OffLabel="否"
                         OnLabel="是" HorizontalAlignment="Right" VerticalAlignment="Top" Margin="0,277,82.333,0" Height="60" Width="153" Click="StartBoxIsBlack_Click" />
+                    <Controls:ToggleSwitch x:Name="BingDaily"
+                        Header="使用Bing每日图片"
+                        Style="{StaticResource MahApps.Metro.Styles.ToggleSwitch.Win10}"
+                        OffLabel="否"
+                        OnLabel="是" HorizontalAlignment="Right" VerticalAlignment="Top" Margin="0,342,115.333,0" Height="60" Width="120" Click="BingDaily_Click" />
                 </Grid>
             </TabItem>
             <TabItem Header=" 主题     ">

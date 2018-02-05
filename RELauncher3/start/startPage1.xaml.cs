@@ -28,8 +28,10 @@ namespace RELauncher3.start
         public startPage1()
         {
             InitializeComponent();
+
             quesBlock.Text = "您将以" + System.Environment.UserName + "的用户名登录游戏";
             usrNameblk.Text = System.Environment.UserName;
+            btnCNm.Content = "不是" + Environment.UserName + "?";
         }
 
         private void button_Click(object sender, RoutedEventArgs e)

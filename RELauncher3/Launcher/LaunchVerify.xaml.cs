@@ -44,6 +44,11 @@ namespace RELauncher3.Launcher
                 Settings.Default.Save();
             }
             MemoryText.Text = Settings.Default["Memory"].ToString();
+
+            if (listBoxVersion.Items.Count == 0)//如果没有任何可选择的版本就提示
+            {
+                LaunchListEmpty.Visibility = Visibility.Visible;
+            }
         }
 
         private void BackTile_Click(object sender, RoutedEventArgs e)
@@ -56,10 +61,16 @@ namespace RELauncher3.Launcher
 
         private void LauchBtn_Click(object sender, RoutedEventArgs e)
         {
-            Thread launch = new Thread(LaunchGame);
-            launch.IsBackground = true;
-            launch.Start();
-
+            if (listBoxVersion.SelectedItem != null)
+            {
+                Thread launch = new Thread(LaunchGame);
+                launch.IsBackground = true;
+                launch.Start();
+            }
+            else
+            {
+                //提示请选择版本
+            }
         }
 
         void LaunchGame()
@@ -187,6 +198,7 @@ namespace RELauncher3.Launcher
                                 (resultCheck.Exception == null ? string.Empty : resultCheck.Exception.StackTrace), "启动错误，请将此窗口截图向开发者寻求帮助");
                                 break;
                         }
+                        LaunchBtn.Content = "启动失败";
                     }
 
                 }

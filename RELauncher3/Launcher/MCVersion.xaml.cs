@@ -24,6 +24,8 @@ namespace RELauncher3.Launcher
         public MCVersion()
         {
             InitializeComponent();
+            DataBase db = new DataBase();
+            VersionJson = db.GetMinecraftVersionJson(1);
         }
 
         private void BackTile_Click(object sender, RoutedEventArgs e)

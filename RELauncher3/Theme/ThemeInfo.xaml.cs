@@ -44,7 +44,7 @@ namespace RELauncher3.Theme
             ThemeInfo_str = GetRequest(dirURL + "/Theme.Info");//获取主题信息
             while (ThemeInfo_str != "")
             {
-                count();
+                count();//读下一行
                 switch (Info)
                 {
                     case "Author":
@@ -58,7 +58,7 @@ namespace RELauncher3.Theme
 
                         await Task.Run(() => Thread.Sleep(0));
                         Picture1.Source = GetPicture2Image(dirURL + "/Picture1.png");
-                        PictureFlipView.BannerText = "展示图1";
+                        PictureFlipView.BannerText = ThemeNameBlock.Text;
                         await Task.Delay(0);
 
                         PictureFlipView.Items.Add(Picture1);
@@ -69,8 +69,7 @@ namespace RELauncher3.Theme
                         Image Picture2 = new Image();
 
                         await Task.Run(() => Thread.Sleep(0));
-                        Picture2.Source = GetPicture2Image(dirURL + "/Picture1.png");
-                        PictureFlipView.BannerText = "展示图2";
+                        Picture2.Source = GetPicture2Image(dirURL + "/Picture2.png");
                         await Task.Delay(0);
 
                         PictureFlipView.Items.Add(Picture2);
@@ -81,8 +80,7 @@ namespace RELauncher3.Theme
                         Image Picture3 = new Image();
 
                         await Task.Run(() => Thread.Sleep(0));
-                        Picture3.Source = GetPicture2Image(dirURL + "/Picture1.png");
-                        PictureFlipView.BannerText = "展示图1";
+                        Picture3.Source = GetPicture2Image(dirURL + "/Picture3.png");
                         await Task.Delay(0);
 
                         PictureFlipView.Items.Add(Picture3);
@@ -92,6 +90,16 @@ namespace RELauncher3.Theme
                         count();
                         ThemeDescribtion.Text = Info;
                         break;
+
+                    case "Color":
+                        count();
+                        Color = Info;//将颜色赋值到变量Color
+                        break;
+
+                    case "Background":
+                        count();
+                        BackgroundPicture = Info;//将背景值赋值到background变量
+                        break;
                 }
             }
             await Task.Delay(0);
@@ -99,13 +107,20 @@ namespace RELauncher3.Theme
 
         void count()
         {
-            Info = ThemeInfo_str.Substring(0, ThemeInfo_str.IndexOf("\n"));
-            ThemeInfo_str = ThemeInfo_str.Substring(ThemeInfo_str.IndexOf("\n") + 1);
+            try
+            {
+                Info = ThemeInfo_str.Substring(0, ThemeInfo_str.IndexOf("\n"));
+                ThemeInfo_str = ThemeInfo_str.Substring(ThemeInfo_str.IndexOf("\n") + 1);
+            }
+            catch
+            {
+                ThemeInfo_str = "";//结束循环
+            }
         }
 
         async void GetIconThread()
         {
-            await Task.Run(() => Thread.Sleep(10));
+            await Task.Run(() => Thread.Sleep(100));
             GetPictureFromURL(iconURL, IconBox);
             await Task.Delay(100);
         }
@@ -170,6 +185,25 @@ namespace RELauncher3.Theme
         private void BackTile_Click(object sender, RoutedEventArgs e)
         {
             MainWindow.grid = new Launcher.ThemePage();
+        }
+
+        //DataBase:
+        string BackgroundPicture = "";//背景路径 (认为它是完整的链接) (腾讯云) png
+        string Color = "Blue";//颜色 (默认蓝色)
+        bool StartIsBlack = true;//开始二字的颜色为黑:默认是
+
+        private void InstallBtn_Click(object sender, RoutedEventArgs e)
+        {
+            if (BackgroundPicture != "")
+            {
+                DownloadFile(BackgroundPicture, @"./RE3/Theme/" + ThemeNameBlock.Text+"/Background.png");
+            }
+        }
+
+        void DownloadFile(string url,string SavePath)//下载地址，保存路径
+        {
+            WebClient myWebClient = new WebClient();
+            myWebClient.DownloadFile(url, SavePath);
         }
     }
 }

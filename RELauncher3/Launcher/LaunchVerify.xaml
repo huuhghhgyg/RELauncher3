@@ -22,7 +22,15 @@
         <TextBlock x:Name="textBlock" HorizontalAlignment="Left" Margin="73,10,0,440" TextWrapping="Wrap" Text="确认信息" FontSize="16"/>
 
         <Grid x:Name="ControlsGrid" Height="40" Margin="0" VerticalAlignment="Top"/>
-        <ListBox x:Name="listBoxVersion" Width="350" Margin="0,80,0,0" HorizontalAlignment="Left" ScrollViewer.HorizontalScrollBarVisibility="Auto" ScrollViewer.VerticalScrollBarVisibility="Visible" Background="White"/>
+        <Grid x:Name="LaunchListEmpty" HorizontalAlignment="Left" Margin="0,80,0,0" Width="350" Visibility="Hidden">
+            <Rectangle Width="50" Height="50" Fill="#FF6B6B6B" Margin="0,-40,0,0">
+                <Rectangle.OpacityMask>
+                    <VisualBrush Visual="{StaticResource appbar_smiley_tounge}" Stretch="Uniform" />
+                </Rectangle.OpacityMask>
+            </Rectangle>
+            <TextBlock TextWrapping="Wrap" Text="这里似乎什么也没有" Foreground="#FF6B6B6B" FontSize="16" FontWeight="Bold" Margin="0,50,0,0" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+        </Grid>
+        <ListBox x:Name="listBoxVersion" Width="350" Margin="0,80,0,0" HorizontalAlignment="Left" ScrollViewer.HorizontalScrollBarVisibility="Auto" ScrollViewer.VerticalScrollBarVisibility="Visible" Background="{x:Null}"/>
         <Grid Margin="350,40,0,80">
             <TextBlock x:Name="textBlock2" HorizontalAlignment="Left" Margin="20,15,0,0" TextWrapping="Wrap" Text="玩家信息" VerticalAlignment="Top" FontSize="21.333"/>
             <TextBlock x:Name="UsernameBlock" HorizontalAlignment="Left" Margin="20,47,0,0" TextWrapping="Wrap" Text="UserName" VerticalAlignment="Top" FontSize="16"/>
@@ -39,5 +47,4 @@
                     Content="启动"
                     Style="{DynamicResource AccentedSquareButtonStyle}" Margin="0,0,50,30" HorizontalAlignment="Right" Height="31" VerticalAlignment="Bottom" BorderBrush="{x:Null}" Click="LauchBtn_Click" />
     </Grid>
-
 </Grid>
