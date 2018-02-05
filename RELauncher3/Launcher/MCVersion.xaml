@@ -16,8 +16,22 @@
                 </Rectangle.OpacityMask>
             </Rectangle>
         </Controls:Tile>
-        <TextBlock x:Name="textBlock" HorizontalAlignment="Left" Margin="73,10,0,440" TextWrapping="Wrap" Text="Minecraft本体文件" FontSize="16"/>
-        <ListBox Margin="30,60" Background="Gray"/>
-
+        <TextBlock x:Name="textBlock" HorizontalAlignment="Left" Margin="73,10,0,440" TextWrapping="Wrap" FontSize="16"><Run Text="Minecraft"/><Run Text="版本列表"/></TextBlock>
+        <ListBox x:Name="ListBoxVersion" ScrollViewer.HorizontalScrollBarVisibility="Auto" ScrollViewer.VerticalScrollBarVisibility="Visible" Margin="0,80,530,0" MouseLeftButtonUp="ListBoxVersion_MouseLeftButtonUp"/>
+        <TextBlock HorizontalAlignment="Left" Margin="10,55,0,0" TextWrapping="Wrap" Text="版本" VerticalAlignment="Top" FontSize="16" FontWeight="Bold"/>
+        <TextBlock HorizontalAlignment="Left" Margin="400,55,0,0" TextWrapping="Wrap" Text="详细信息" VerticalAlignment="Top" FontSize="16" FontWeight="Bold"/>
+        <Grid Height="200" Margin="400,80,100,0" VerticalAlignment="Top">
+            <TextBlock HorizontalAlignment="Left" Margin="10,10,0,0" TextWrapping="Wrap" Text="版本:" VerticalAlignment="Top"/>
+            <TextBlock x:Name="VersionBlock" Margin="42,10,10,0" TextWrapping="Wrap" Text="Version" VerticalAlignment="Top"/>
+            <TextBlock HorizontalAlignment="Left" Margin="10,75,0,0" TextWrapping="Wrap" VerticalAlignment="Top"><Run Text="路径"/><Run Text=":"/></TextBlock>
+            <TextBlock x:Name="PathBlock" Margin="42,75,10,0" TextWrapping="Wrap" Text="Path" VerticalAlignment="Top"/>
+            <TextBlock HorizontalAlignment="Left" Margin="10,40,0,0" TextWrapping="Wrap" VerticalAlignment="Top"><Run Text="创建时间"/><Run Text=":"/></TextBlock>
+            <TextBlock x:Name="CreateTimeBlock" Margin="61,40,10,0" TextWrapping="Wrap" Text="Time" VerticalAlignment="Top"/>
+        </Grid>
+        <TextBlock HorizontalAlignment="Right" Margin="0,55,53,0" TextWrapping="Wrap" Text="操作" VerticalAlignment="Top" FontSize="16" FontWeight="Bold"/>
+        <Button x:Name="OpenPathButton" Content="打开目录" HorizontalAlignment="Right" Margin="0,80,10,0" VerticalAlignment="Top" Width="75" FontFamily="Microsoft YaHei UI" FontWeight="Normal" Click="OpenPathButton_Click"/>
+        <Button x:Name="DeleteButton" Content="删除" HorizontalAlignment="Right" Margin="0,176,10,0" VerticalAlignment="Top" Width="75" Foreground="Red" FontFamily="Microsoft YaHei UI" FontWeight="Normal" Click="DeleteButton_Click"/>
+        <Button x:Name="TurnToLaunchButton" Content="启动" HorizontalAlignment="Right" Margin="0,112,10,0" VerticalAlignment="Top" Width="75" FontFamily="Microsoft YaHei UI" FontWeight="Normal" Click="TurnToLaunchButton_Click"/>
+        <Button x:Name="RefreshButton" Content="刷新" HorizontalAlignment="Right" Margin="0,144,10,0" VerticalAlignment="Top" Width="75" FontFamily="Microsoft YaHei UI" FontWeight="Normal" Click="RefreshButton_Click"/>
     </Grid>
 </Grid>
