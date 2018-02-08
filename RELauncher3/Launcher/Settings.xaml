@@ -68,6 +68,13 @@
                             Orientation="Horizontal">
                         </StackPanel>
                     </Controls:Flyout>
+                    <Controls:Flyout x:Name="TipBoard" Header="MessageHere!" Position="Bottom" AutoCloseInterval="2500" IsAutoCloseEnabled="True">
+                        <StackPanel Height="80"
+                            Margin="5,5,5,5"
+                            HorizontalAlignment="Right"
+                            Orientation="Horizontal">
+                        </StackPanel>
+                    </Controls:Flyout>
                 </Grid>
             </TabItem>
             <TabItem x:Name="AdvancedItem" Header=" 高级设置">

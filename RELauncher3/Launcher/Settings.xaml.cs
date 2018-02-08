@@ -15,6 +15,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using KMCCC.Tools;
+using Microsoft.VisualBasic.Devices;
 
 namespace RELauncher3.Launcher
 {
@@ -29,9 +30,14 @@ namespace RELauncher3.Launcher
             LoadSettings();
         }
 
+        void PopupMessage(string msg)
+        {
+            TipBoard.Header = msg;
+            TipBoard.IsOpen = true;
+        }
+
         void LoadSettings()
         {
-
             UserNameText.Text = Settings.Default["UserName"].ToString();
             PasswordBox.Password = Settings.Default["Password"].ToString();
             OnlineAccount.IsChecked = bool.Parse(Settings.Default["OnlineAccount"].ToString());
@@ -101,8 +107,26 @@ namespace RELauncher3.Launcher
 
         private void MemoryText_TextChanged(object sender, TextChangedEventArgs e)
         {
-            Settings.Default["Memory"] = MemoryText.Text;
-            Settings.Default.Save();
+            ComputerInfo info = new ComputerInfo();
+            if (MemoryText.Text!="")
+            {
+                try
+                {
+                    if (Convert.ToDouble(MemoryText.Text) <= info.TotalPhysicalMemory / 1024 / 1024)//设置值小于物理内存大小
+                    {
+                        Settings.Default["Memory"] = MemoryText.Text;
+                        Settings.Default.Save();
+                    }
+                    else
+                    {
+                        PopupMessage("设置内存值不应大于物理内存大小:" + (info.TotalPhysicalMemory / 1024 / 1024).ToString());
+                    }
+                }
+                catch (System.FormatException)
+                {
+                    PopupMessage("请输入数值");
+                }
+            }
         }
 
         private void JavaPathText_TextChanged(object sender, TextChangedEventArgs e)
@@ -141,6 +165,11 @@ namespace RELauncher3.Launcher
             {
                 DataBase DB = new DataBase();
                 MemoryText.Text = DB.AutoSetMemory();
+                if (MemoryText.Text == "")//如果没有内存大小则自动填充
+                {
+                    ComputerInfo info = new ComputerInfo();
+                    MemoryText.Text = (info.AvailablePhysicalMemory / 1024 / 1024).ToString();
+                }
                 SaveSettings();
             }
         }
