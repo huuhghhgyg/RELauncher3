@@ -40,7 +40,7 @@ namespace RELauncher3.Launcher
             if (Settings.Default["AutoSetMemory"].ToString() == "true")
             {
                 DataBase DB = new DataBase();
-                Settings.Default["AutoSetMemory"]=DB.AutoSetMemory();
+                Settings.Default["AutoSetMemory"] = DB.AutoSetMemory();
                 Settings.Default.Save();
             }
             MemoryText.Text = Settings.Default["Memory"].ToString();
@@ -70,7 +70,14 @@ namespace RELauncher3.Launcher
             else
             {
                 //提示请选择版本
+                PopupMessage("请选择要启动的版本");
             }
+        }
+
+        void PopupMessage(string msg)
+        {
+            TipBoard.Header = msg;
+            TipBoard.IsOpen = true;
         }
 
         void LaunchGame()
@@ -108,7 +115,6 @@ namespace RELauncher3.Launcher
                     _ServerPort = Settings.Default["ServerPort"].ToString();//读端口
                 }
 
-                //try
                 {
                     LaunchResult resultCheck;
                     if (bool.Parse(Settings.Default["OnlineAccount"].ToString()) == true)//启动选项
@@ -200,11 +206,6 @@ namespace RELauncher3.Launcher
                         }
                         LaunchBtn.Content = "启动失败";
                     }
-
-                }
-                //catch
-                {
-                //    MessageBox.Show("没输完");
                 }
             }));
 
@@ -216,7 +217,7 @@ namespace RELauncher3.Launcher
             st.ClearRAM();
 
             DataBase DB = new DataBase();
-            MemoryText.Text= DB.AutoSetMemory();
+            MemoryText.Text = DB.AutoSetMemory();
 
             Settings.Default["Memory"] = MemoryText.Text;
             Settings.Default.Save();

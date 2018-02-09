@@ -47,4 +47,11 @@
                     Content="启动"
                     Style="{DynamicResource AccentedSquareButtonStyle}" Margin="0,0,50,30" HorizontalAlignment="Right" Height="31" VerticalAlignment="Bottom" BorderBrush="{x:Null}" Click="LauchBtn_Click" />
     </Grid>
+    <Custom:Flyout x:Name="TipBoard" Header="MessageHere!" Position="Bottom" AutoCloseInterval="2500" IsAutoCloseEnabled="True">
+        <StackPanel Height="80"
+                            Margin="5,5,5,5"
+                            HorizontalAlignment="Right"
+                            Orientation="Horizontal">
+        </StackPanel>
+    </Custom:Flyout>
 </Grid>
