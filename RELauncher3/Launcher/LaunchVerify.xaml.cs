@@ -208,7 +208,6 @@ namespace RELauncher3.Launcher
                     }
                 }
             }));
-
         }
 
         private void ReleaseMemoryBtn_Click(object sender, RoutedEventArgs e)

@@ -49,7 +49,7 @@ namespace RELauncher3.Update
         public void checkVer(string url)
         {
             ServicePointManager.SecurityProtocol = SecurityProtocolType.Ssl3;
-            System.Net.ServicePointManager.SecurityProtocol = SecurityProtocolType.Tls12;
+            ServicePointManager.SecurityProtocol = SecurityProtocolType.Tls12;
             XmlDocument doc = new XmlDocument();
             doc.Load(url);
             XmlNode config = doc.SelectSingleNode("Config");

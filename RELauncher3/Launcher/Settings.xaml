@@ -103,7 +103,7 @@
                     <TextBlock x:Name="textBlock4" HorizontalAlignment="Left" Margin="160,225,0,0" TextWrapping="Wrap" Text="×" VerticalAlignment="Top" FontSize="16" Height="26"/>
                 </Grid>
             </TabItem>
-            <TabItem x:Name="OthersItem" Header=" 其它">
+            <TabItem x:Name="OthersItem" Header=" 其它" Visibility="Hidden">
                 <Grid Background="White"/>
             </TabItem>
         </TabControl>

@@ -33,8 +33,8 @@ namespace RELauncher3.Launcher
         {
             InitializeComponent();
 
-            //Thread LoadItem = new Thread(AddThemeItem);
-            //LoadItem.Start();
+            Thread LoadItem = new Thread(AddThemeItem);
+            LoadItem.Start();
 
             //AddThemeItem();
             //GetPictureFromURL("https://huuhghhgyg.github.io/RE3/Theme/Orginal/Icon.jpg", ExampleGrid);
@@ -83,6 +83,9 @@ namespace RELauncher3.Launcher
         string ThemeListOnce = "";
         void AddThemeItem()
         {
+            ServicePointManager.SecurityProtocol = SecurityProtocolType.Ssl3;
+            ServicePointManager.SecurityProtocol = SecurityProtocolType.Tls12;
+
             ThemeListOnce = GetRequest("https://huuhghhgyg.github.io/RE3/Theme/ThemeList.content");
             string ThemeName = "", ThemeDir = "", ThemeIcon = "";//顺序也为 名字 目录 Icon
             while (ThemeListOnce != "")
@@ -114,6 +117,8 @@ namespace RELauncher3.Launcher
 
         static string GetRequest(string URL)//用于获取主题列表
         {
+            ServicePointManager.SecurityProtocol = SecurityProtocolType.Ssl3;
+            ServicePointManager.SecurityProtocol = SecurityProtocolType.Tls12;
 
             var request = (HttpWebRequest)WebRequest.Create(URL);
             var response = (HttpWebResponse)request.GetResponse();

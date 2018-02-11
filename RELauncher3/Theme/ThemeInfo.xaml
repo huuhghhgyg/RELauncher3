@@ -33,5 +33,12 @@
                 <TextBlock x:Name="AuthorBox" HorizontalAlignment="Left" Margin="130,90,0,0" TextWrapping="Wrap" Text="Author" VerticalAlignment="Top" FontSize="20"/>
             </Grid>
         </ScrollViewer>
+        <Controls:Flyout x:Name="TipBoard" Header="MessageHere!" Position="Bottom" AutoCloseInterval="2500" IsAutoCloseEnabled="True">
+            <StackPanel Height="80"
+                            Margin="5,5,5,5"
+                            HorizontalAlignment="Right"
+                            Orientation="Horizontal">
+            </StackPanel>
+        </Controls:Flyout>
     </Grid>
 </Grid>

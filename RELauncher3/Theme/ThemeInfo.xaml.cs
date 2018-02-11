@@ -1,4 +1,5 @@
-﻿using System;
+﻿using RELauncher3.Properties;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -118,6 +119,12 @@ namespace RELauncher3.Theme
             }
         }
 
+        void PopupMessage(string msg)
+        {
+            TipBoard.Header = msg;
+            TipBoard.IsOpen = true;
+        }
+
         async void GetIconThread()
         {
             await Task.Run(() => Thread.Sleep(100));
@@ -194,13 +201,39 @@ namespace RELauncher3.Theme
 
         private void InstallBtn_Click(object sender, RoutedEventArgs e)
         {
-            if (BackgroundPicture != "")
+            ///创建路径
+            if (Directory.Exists(@"./RE3/Theme/" + ThemeNameBlock.Text) == false)
             {
-                DownloadFile(BackgroundPicture, @"./RE3/Theme/" + ThemeNameBlock.Text+"/Background.png");
+                Directory.CreateDirectory(@"./RE3/Theme/" + ThemeNameBlock.Text);
+            }
+            //下载背景图
+            string _backgroundpath = "./RE3/Theme/" + ThemeNameBlock.Text + "/Background.png";
+            try
+            {
+                if (BackgroundPicture != "")
+                {
+                    if (File.Exists(@_backgroundpath))
+                    {
+                        File.Delete(@_backgroundpath);
+                    }
+                    DownloadFile(BackgroundPicture, @_backgroundpath);
+                }
+
+                //应用背景
+                Settings.Default["BGPPath"] = @_backgroundpath;//设置背景图片路径
+                ///设置颜色
+                Settings.Default["ThemeColor"] = Color;
+                Settings.Default["StartBoxIsBlack"] = StartIsBlack;
+                Settings.Default.Save();
+                PopupMessage("已应用主题");
+            }
+            catch (System.IO.IOException)
+            {
+                PopupMessage("失败，请关闭程序并删除运行目录下RE3文件夹；或选择其它主题");
             }
         }
 
-        void DownloadFile(string url,string SavePath)//下载地址，保存路径
+        void DownloadFile(string url, string SavePath)//下载地址，保存路径
         {
             WebClient myWebClient = new WebClient();
             myWebClient.DownloadFile(url, SavePath);

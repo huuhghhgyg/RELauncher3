@@ -21,6 +21,8 @@ using System.IO;
 using RELauncher3.Properties;
 using System.Net;
 using GetBingWallpaper;
+using System.Runtime.InteropServices;
+using Microsoft.Win32.SafeHandles;
 
 namespace RELauncher3
 {
@@ -40,12 +42,6 @@ namespace RELauncher3
                 IsBackground = true
             };//检查更新
             checkupdate.Start();
-
-            //string URL="http://huuhghhgyg.github.io/BGM/LifeInTheFastLane.mp3";
-            //MediaPlayer player = new MediaPlayer();
-            //player.Stop();
-            //Uri uriStreaming = new Uri(URL);
-            //player.Play();
         }
 
         async void GetPictureFromURL(string URL, Image image)
@@ -128,7 +124,6 @@ namespace RELauncher3
             {
                 ChangeBackground(path);//更改背景
             }
-
             bool IfStartBoxIsBlack = bool.Parse((Settings.Default["StartBoxIsBlack"].ToString()));//“开始”二字颜色是黑还是白？
             if (IfStartBoxIsBlack == false)
             {
@@ -142,10 +137,13 @@ namespace RELauncher3
 
         void ChangeBackground(string Path)//更改主页背景
         {
-            var imgBrush = new ImageBrush();
+            if (File.Exists(Path))
+            {
+                var imgBrush = new ImageBrush();
 
-            imgBrush.ImageSource = new BitmapImage(new Uri(@Path, UriKind.Relative));
-            showGrid.Background = imgBrush;
+                imgBrush.ImageSource = new BitmapImage(new Uri(@Path, UriKind.Relative));
+                showGrid.Background = imgBrush;
+            }
         }
 
         /// <summary>
