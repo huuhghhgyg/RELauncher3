@@ -101,6 +101,11 @@ namespace RELauncher3.Theme
                         count();
                         BackgroundPicture = Info;//将背景值赋值到background变量
                         break;
+
+                    case "StartIsBlack":
+                        count();
+                        StartIsBlack = bool.Parse(Info);
+                        break;
                 }
             }
             await Task.Delay(0);
@@ -191,7 +196,7 @@ namespace RELauncher3.Theme
 
         private void BackTile_Click(object sender, RoutedEventArgs e)
         {
-            MainWindow.grid = new Launcher.ThemePage();
+            MainWindow.grid = new Launcher.Personality();
         }
 
         //DataBase:
@@ -223,6 +228,7 @@ namespace RELauncher3.Theme
                 Settings.Default["BGPPath"] = @_backgroundpath;//设置背景图片路径
                 ///设置颜色
                 Settings.Default["ThemeColor"] = Color;
+                MainWindow.changeColor(Color, "BaseLight");//更改颜色
                 Settings.Default["StartBoxIsBlack"] = StartIsBlack;
                 Settings.Default.Save();
                 PopupMessage("已应用主题");

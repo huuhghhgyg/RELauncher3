@@ -24,10 +24,10 @@
                     Width="430" Height="100"  ScrollViewer.CanContentScroll="True" FontSize="26.667" Content="UserName" Margin="11,3,3,3" VerticalAlignment="Top" HorizontalAlignment="Left">
                 </Controls:Tile>
 
-                <Controls:Tile x:Name="ThemeTile" Title="主题" 
+                <Controls:Tile x:Name="PersonalityTile" Title="个性化" 
                     TiltFactor="2"
                     Width="210" Height="100" 
-                    Count="" Margin="10,3,3,3" VerticalAlignment="Top" HorizontalAlignment="Left" Click="ThemeTile_Click">
+                    Count="" Margin="10,3,3,3" VerticalAlignment="Top" HorizontalAlignment="Left" Click="PersonalityTile_Click">
                     <Rectangle Fill="White" Width="45" Height="45">
                         <Rectangle.OpacityMask>
                             <VisualBrush Visual="{StaticResource appbar_acorn}" Stretch="Uniform" />
@@ -68,17 +68,20 @@
                     Width="210" Height="100" Margin="10,10,3,3" HorizontalAlignment="Left" VerticalAlignment="Top" Click="VersionTile_Click">
                     <Controls:TransitioningContentControl x:Name="UpdateInfo" Width="160" Height="35" Transition="Down" Content="已是最新版本" FontSize="26.667" HorizontalAlignment="Center" HorizontalContentAlignment="Center"/>
                 </Controls:Tile>
-                <Controls:Tile Title="施工中..." 
-        	TiltFactor="2"
-        	Width="208" Height="210
-                       " 
-        	Count="" Margin="10,10,3,3" VerticalAlignment="Top" HorizontalAlignment="Left"/>
+                <Controls:Tile Title="通知" TiltFactor="2" Width="208" Height="210" 
+        	Count="" Margin="10,10,3,3" VerticalAlignment="Top" HorizontalAlignment="Left" FontSize="16">
+                    <Rectangle Fill="White" Width="70" Height="70">
+                        <Rectangle.OpacityMask>
+                            <VisualBrush Visual="{StaticResource appbar_newspaper_create}" Stretch="Uniform" />
+                        </Rectangle.OpacityMask>
+                    </Rectangle>
+                </Controls:Tile>
 
-                <Controls:Tile Title="施工中..." 
+                <Controls:Tile x:Name="ThemeTile" Title="主题" 
         	TiltFactor="2"
         	Width="210" Height="210
                        " 
-        	Count="" Margin="10,10,3,3" VerticalAlignment="Top" HorizontalAlignment="Left"/>
+        	Count="" Margin="10,10,3,3" VerticalAlignment="Top" HorizontalAlignment="Left" Click="ThemeTile_Click"/>
                 <Controls:Tile x:Name="IsOnlineModeTile" Title="验证模式" 
         	TiltFactor="2"
         	Width="213" Height="100" 

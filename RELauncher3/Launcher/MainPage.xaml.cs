@@ -200,10 +200,10 @@ namespace RELauncher3
             showGrid.Children.Add(grid);
         }
 
-        private void ThemeTile_Click(object sender, RoutedEventArgs e)
+        private void PersonalityTile_Click(object sender, RoutedEventArgs e)
         {
             Grid grid;
-            grid = new ThemePage();
+            grid = new Personality();
             showGrid.Children.Clear();
             showGrid.Children.Add(grid);
         }
@@ -212,6 +212,14 @@ namespace RELauncher3
         {
             Grid grid;
             grid = new UpdatePage();
+            showGrid.Children.Clear();
+            showGrid.Children.Add(grid);
+        }
+
+        private void ThemeTile_Click(object sender, RoutedEventArgs e)
+        {
+            Grid grid;
+            grid = new ThemePage();
             showGrid.Children.Clear();
             showGrid.Children.Add(grid);
         }

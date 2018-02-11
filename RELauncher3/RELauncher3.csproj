@@ -119,6 +119,9 @@
     <Compile Include="Launcher\LaunchVerify.xaml.cs">
       <DependentUpon>LaunchVerify.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Launcher\Personality.xaml.cs">
+      <DependentUpon>Personality.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Launcher\ThemePage.xaml.cs">
       <DependentUpon>ThemePage.xaml</DependentUpon>
     </Compile>
@@ -160,6 +163,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Launcher\LaunchVerify.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Launcher\Personality.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
