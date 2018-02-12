@@ -55,8 +55,11 @@ namespace RELauncher3.Launcher
                 {
                     ThemeList.Children.Add(new Theme.ThemeItem(ThemeIcon, ThemeName, ThemeDir));
                 }));
-
                 //MSGBox.Text += s + "\n";
+                Dispatcher.Invoke(new Action(delegate
+                {
+                    LoadingGrid.Visibility = Visibility.Hidden;
+                }));
             }
         }
 

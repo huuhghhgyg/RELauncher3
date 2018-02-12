@@ -33,6 +33,7 @@ namespace RELauncher3.Launcher
         {
             InitializeComponent();
 
+            LoadingGrid.Visibility = Visibility.Visible;
             Thread LoadItem = new Thread(AddThemeItem);
             LoadItem.Start();
 
@@ -87,13 +88,16 @@ namespace RELauncher3.Launcher
             ServicePointManager.SecurityProtocol = SecurityProtocolType.Tls12;
 
             ThemeListOnce = GetRequest("https://huuhghhgyg.github.io/RE3/Theme/ThemeList.content");
+            //ThemeListOnce = GetRequest("http://launcher3-1251886115.cossh.myqcloud.com/Theme/ThemeList.content");
             string ThemeName = "", ThemeDir = "", ThemeIcon = "";//顺序也为 名字 目录 Icon
             while (ThemeListOnce != "")
             {
                 count();
+                ///此处定制
                 ThemeName = Info;
                 count();
                 ThemeDir = "https://huuhghhgyg.github.io/RE3/Theme" + Info;
+                //ThemeDir = "http://launcher3-1251886115.cossh.myqcloud.com/Theme" + Info;
                 count();
                 ThemeIcon = Info;
                 if (ThemeListOnce != "")//防止报错
@@ -101,12 +105,15 @@ namespace RELauncher3.Launcher
                     count();
                 }
                 Dispatcher.Invoke(new Action(delegate
-                        {
-                            ThemeList.Children.Add(new Theme.ThemeItem(ThemeIcon, ThemeName, ThemeDir));
-                        }));
-
+                {
+                    ThemeList.Children.Add(new Theme.ThemeItem(ThemeIcon, ThemeName, ThemeDir));
+                }));
                 //MSGBox.Text += s + "\n";
             }
+            Dispatcher.Invoke(new Action(delegate
+            {
+                LoadingGrid.Visibility = Visibility.Hidden;
+            }));
         }
 
         void count()

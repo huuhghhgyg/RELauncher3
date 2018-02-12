@@ -40,9 +40,10 @@ namespace RELauncher3.Theme
         string Info = "";
         async void GetThemeInfo()
         {
-            await Task.Run(() => Thread.Sleep(0));
+            await Task.Run(() => {
+                ThemeInfo_str = GetRequest(dirURL + "/Theme.Info");//获取主题信息
+            });
 
-            ThemeInfo_str = GetRequest(dirURL + "/Theme.Info");//获取主题信息
             while (ThemeInfo_str != "")
             {
                 count();//读下一行
@@ -188,6 +189,7 @@ namespace RELauncher3.Theme
         static string GetRequest(string URL)//用于获取主题列表
         {
             var request = (HttpWebRequest)WebRequest.Create(URL);
+            request.Timeout = 5000;
             var response = (HttpWebResponse)request.GetResponse();
             var responseString = new StreamReader(response.GetResponseStream()).ReadToEnd();
             return responseString.ToString();
@@ -230,6 +232,7 @@ namespace RELauncher3.Theme
                 Settings.Default["ThemeColor"] = Color;
                 MainWindow.changeColor(Color, "BaseLight");//更改颜色
                 Settings.Default["StartBoxIsBlack"] = StartIsBlack;
+                Settings.Default["BingDaily"] = false;
                 Settings.Default.Save();
                 PopupMessage("已应用主题");
             }
