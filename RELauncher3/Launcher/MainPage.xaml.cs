@@ -105,6 +105,11 @@ namespace RELauncher3
             if (bool.Parse(Settings.Default["BingDaily"].ToString()) == true)
             {
                 GetWallPaper WallPaperGetter = new GetWallPaper();
+                if (Directory.Exists(@"./RE3/Theme/BingDaily") == false)
+                {
+                    Directory.CreateDirectory(@"./RE3/Theme/BingDaily");
+                }
+                WallPaperGetter.SavePathBase = @"./RE3/Theme/BingDaily";
                 if (File.Exists(WallPaperGetter.SavePath) != true)
                 {
                     Dispatcher.Invoke(new Action(delegate
