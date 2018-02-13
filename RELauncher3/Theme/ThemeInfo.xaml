@@ -17,7 +17,7 @@
                     </Rectangle.OpacityMask>
                 </Rectangle>
             </Controls:Tile>
-            <TextBlock HorizontalAlignment="Left" Margin="73,10,0,0" TextWrapping="Wrap" Text="设置" VerticalAlignment="Top" FontSize="16"/>
+            <TextBlock HorizontalAlignment="Left" Margin="73,10,0,0" TextWrapping="Wrap" Text="主题" VerticalAlignment="Top" FontSize="16"/>
         </Grid>
 
         <ScrollViewer Margin="0,40,0,0">
@@ -27,6 +27,7 @@
                 <Button x:Name="InstallBtn" Width="100"
                 Content="应用"
                 Style="{DynamicResource AccentedSquareButtonStyle}" Margin="0,45,50,0" HorizontalAlignment="Right" Height="31" VerticalAlignment="Top" BorderBrush="{x:Null}" Click="InstallBtn_Click" />
+                <Controls:ProgressRing x:Name="ProgressringLoading" Visibility="Hidden" Margin="841,45,15,575" Width="30" Height="30"/>
                 <TextBlock x:Name="ThemedescribtionTitle" FontSize="25" Text="介绍" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="20,450,0,0"/>
                 <TextBlock x:Name="ThemeDescribtion" FontSize="16" Text="ThemeDescribtion" Margin="20,490,100,10"/>
                 <Image x:Name="IconBox" HorizontalAlignment="Left" Height="100" Margin="20,30,0,0" VerticalAlignment="Top" Width="100"/>

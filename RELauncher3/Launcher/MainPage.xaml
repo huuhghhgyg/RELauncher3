@@ -79,9 +79,13 @@
 
                 <Controls:Tile x:Name="ThemeTile" Title="主题" 
         	TiltFactor="2"
-        	Width="210" Height="210
-                       " 
-        	Count="" Margin="10,10,3,3" VerticalAlignment="Top" HorizontalAlignment="Left" Click="ThemeTile_Click"/>
+        	Width="210" Height="210" Count="" Margin="10,10,3,3" VerticalAlignment="Top" HorizontalAlignment="Left" Click="ThemeTile_Click">
+                    <Rectangle Fill="White" Width="70" Height="70">
+                        <Rectangle.OpacityMask>
+                            <VisualBrush Visual="{StaticResource appbar_cupcake}" Stretch="Uniform" />
+                        </Rectangle.OpacityMask>
+                    </Rectangle>
+                </Controls:Tile>
                 <Controls:Tile x:Name="IsOnlineModeTile" Title="验证模式" 
         	TiltFactor="2"
         	Width="213" Height="100" 

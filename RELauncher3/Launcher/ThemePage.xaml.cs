@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Net;
@@ -28,6 +29,21 @@ namespace RELauncher3.Launcher
             InitializeComponent();
             Thread LoadItem = new Thread(AddThemeItem);
             LoadItem.Start();
+            LoadThemeList();
+        }
+
+        void LoadThemeList()
+        {
+            if(Directory.Exists(@"./RE3/Theme"))
+            {
+                string[] ThemeList = Directory.GetDirectories(@"./RE3/Theme");
+                ThemeListBox.Items.Clear();//清除所有项目
+
+                foreach (string ThemeName in ThemeList)
+                {
+                    ThemeListBox.Items.Add(ThemeName.Substring(ThemeName.LastIndexOf("\\") + 1));
+                }
+            }
         }
 
         string Info = "";
@@ -87,6 +103,51 @@ namespace RELauncher3.Launcher
             grid = new MainPage();
             showGrid.Children.Clear();
             showGrid.Children.Add(grid);
+        }
+
+        private void AddThemeButton_Click(object sender, RoutedEventArgs e)
+        {
+            ThemeTabControl.SelectedIndex = 0;
+        }
+
+        void PopupMessage(string msg)
+        {
+            TipBoard.Header = msg;
+            TipBoard.IsOpen = true;
+        }
+
+        private void DeleteButton_Click(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                Directory.Delete(@"./RE3/Theme/" + ThemeListBox.SelectedItem, true);
+            }
+            catch (System.IO.IOException)
+            {
+                PopupMessage("失败，你已使用此主题。或者您可以清除缓存");
+            }
+            LoadThemeList();
+        }
+
+        void DeleteTheme()
+        {
+            if (File.Exists(@"RE3Cleanner.exe"))
+            {
+                Process.Start("RE3Cleanner.exe");
+                Environment.Exit(0);
+            }
+            else
+            {
+                WebClient myWebClient = new WebClient();
+                myWebClient.DownloadFile("http://launcher3-1251886115.cossh.myqcloud.com/RE3Cleanner.exe", @"./RE3Cleanner.exe");
+                Process.Start("RE3Cleanner.exe");
+                Environment.Exit(0);
+            }
+        }
+
+        private void ClearCacheButton_Click(object sender, RoutedEventArgs e)
+        {
+            DeleteTheme();
         }
     }
 }

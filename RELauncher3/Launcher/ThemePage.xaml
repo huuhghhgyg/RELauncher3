@@ -9,6 +9,7 @@
       d:DesignHeight="470" d:DesignWidth="900">
 
     <Grid x:Name="showGrid" Background="White">
+        <!--Controller-->
         <Controls:Tile x:Name="BackTile" Width="60" Height="40" HorizontalAlignment="Left" Margin="0" Foreground="{x:Null}" VerticalAlignment="Top" Click="BackTile_Click">
             <Rectangle Fill="White" Width="20" Height="20">
                 <Rectangle.OpacityMask>
@@ -17,18 +18,53 @@
             </Rectangle>
         </Controls:Tile>
         <TextBlock x:Name="textBlock" HorizontalAlignment="Left" Margin="73,10,0,440" TextWrapping="Wrap" Text="主题" FontSize="16"/>
+        <!--Controller-->
+
         <Grid Margin="0,40,0,0">
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition/>
-            </Grid.ColumnDefinitions>
-            <ScrollViewer Margin="0" Background="#FFF0F0F0">
-                <WrapPanel x:Name="ThemeList" ScrollViewer.VerticalScrollBarVisibility="Disabled">
-                </WrapPanel>
-            </ScrollViewer>
-            <Grid x:Name="LoadingGrid" Visibility="Hidden">
-                <Controls:ProgressRing/>
-                <TextBlock Text="请稍候" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="0,100,0,0" FontSize="16"/>
-            </Grid>
+            <TabControl x:Name="ThemeTabControl" Controls:TabControlHelper.Underlined="TabPanel" TabStripPlacement="Left">
+                <TabItem Header=" 商店    ">
+                    <Grid Background="#FFE5E5E5">
+                        <ScrollViewer Margin="0" Background="#FFF0F0F0">
+                            <WrapPanel x:Name="ThemeList" ScrollViewer.VerticalScrollBarVisibility="Disabled">
+                            </WrapPanel>
+                        </ScrollViewer>
+                        <Grid x:Name="LoadingGrid" Visibility="Hidden">
+                            <Controls:ProgressRing/>
+                            <TextBlock Text="请稍候" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="0,100,0,0" FontSize="16"/>
+                        </Grid>
+                    </Grid>
+                </TabItem>
+                <TabItem Header=" 管理    ">
+                    <Grid Background="White">
+                        <TextBlock HorizontalAlignment="Left" Margin="10,10,0,0" TextWrapping="Wrap" Text="主题列表" VerticalAlignment="Top" FontSize="16"/>
+                        <ListBox x:Name="ThemeListBox" Background="White" HorizontalAlignment="Left" Margin="10,35,0,10" Width="200" ScrollViewer.VerticalScrollBarVisibility="Visible"/>
+                        <TextBlock HorizontalAlignment="Right" Margin="0,10,60,0" TextWrapping="Wrap" Text="应用主题失败" VerticalAlignment="Top" FontSize="16"/>
+                        <Button x:Name="ClearCacheButton" Width="75"
+                            Content="清除缓存"
+                            Style="{DynamicResource AccentedSquareButtonStyle}" Margin="0,35,81.333,0" HorizontalAlignment="Right" Height="31" VerticalAlignment="Top" BorderBrush="{x:Null}" Background="White" Foreground="{Binding Background, ElementName=BackTile}" FontWeight="Bold" Click="ClearCacheButton_Click" />
+                        <Controls:Tile x:Name="DeleteButton" Width="40" Height="40" HorizontalAlignment="Left" Margin="215,35,0,0" Foreground="{x:Null}" VerticalAlignment="Top" Click="DeleteButton_Click">
+                            <Rectangle Fill="White" Width="15" Height="15">
+                                <Rectangle.OpacityMask>
+                                    <VisualBrush Visual="{StaticResource appbar_delete}" Stretch="Uniform" />
+                                </Rectangle.OpacityMask>
+                            </Rectangle>
+                        </Controls:Tile>
+                        <Controls:Tile x:Name="AddThemeButton" Width="40" Height="40" HorizontalAlignment="Left" Margin="215,80,0,0" Foreground="{x:Null}" VerticalAlignment="Top" Click="AddThemeButton_Click">
+                            <Rectangle Fill="White" Width="15" Height="15">
+                                <Rectangle.OpacityMask>
+                                    <VisualBrush Visual="{StaticResource appbar_add}" Stretch="Uniform" />
+                                </Rectangle.OpacityMask>
+                            </Rectangle>
+                        </Controls:Tile>
+                        <Controls:Flyout x:Name="TipBoard" Header="MessageHere!" Position="Bottom" AutoCloseInterval="2500" IsAutoCloseEnabled="True" Margin="0">
+                            <StackPanel Height="80"
+                                Margin="5,5,5,5"
+                                HorizontalAlignment="Right"
+                                Orientation="Horizontal"/>
+                        </Controls:Flyout>
+                    </Grid>
+                </TabItem>
+            </TabControl>
         </Grid>
     </Grid>
 </Grid>

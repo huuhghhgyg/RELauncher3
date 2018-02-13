@@ -1,6 +1,7 @@
 ﻿using RELauncher3.Properties;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Net;
@@ -40,7 +41,8 @@ namespace RELauncher3.Theme
         string Info = "";
         async void GetThemeInfo()
         {
-            await Task.Run(() => {
+            await Task.Run(() =>
+            {
                 ThemeInfo_str = GetRequest(dirURL + "/Theme.Info");//获取主题信息
             });
 
@@ -199,7 +201,7 @@ namespace RELauncher3.Theme
 
         private void BackTile_Click(object sender, RoutedEventArgs e)
         {
-            MainWindow.grid = new Launcher.Personality();
+            MainWindow.grid = new Launcher.ThemePage();
         }
 
         //DataBase:
@@ -209,6 +211,7 @@ namespace RELauncher3.Theme
 
         private void InstallBtn_Click(object sender, RoutedEventArgs e)
         {
+            ProgressringLoading.Visibility = Visibility.Visible;
             ///创建路径
             if (Directory.Exists(@"./RE3/Theme/" + ThemeNameBlock.Text) == false)
             {
@@ -236,10 +239,11 @@ namespace RELauncher3.Theme
                 Settings.Default["BingDaily"] = false;
                 Settings.Default.Save();
                 PopupMessage("已应用主题");
+                ProgressringLoading.Visibility = Visibility.Hidden;
             }
             catch (System.IO.IOException)
             {
-                PopupMessage("失败，请关闭程序并删除运行目录下RE3文件夹；或选择其它主题");
+                PopupMessage("失败，已应用此主题。请转到主题管理清除缓存；或选择其它主题");
             }
         }
 
