@@ -141,6 +141,7 @@ namespace RELauncher3.Theme
         BitmapImage GetPicture2Image(string URL)//将网址转换成iamge
         {
             var request = WebRequest.Create(URL);
+            request.Timeout = 5000;
 
             using (var response = request.GetResponse())
             using (var stream = response.GetResponseStream())

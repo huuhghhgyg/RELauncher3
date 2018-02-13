@@ -128,6 +128,7 @@ namespace RELauncher3.Launcher
             ServicePointManager.SecurityProtocol = SecurityProtocolType.Tls12;
 
             var request = (HttpWebRequest)WebRequest.Create(URL);
+            request.Timeout = 5000;
             var response = (HttpWebResponse)request.GetResponse();
             var responseString = new StreamReader(response.GetResponseStream()).ReadToEnd();
             return responseString.ToString();

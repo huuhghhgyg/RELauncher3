@@ -16,6 +16,9 @@ using System.Windows.Navigation;
 using System.Windows.Shapes;
 using KMCCC.Tools;
 using Microsoft.VisualBasic.Devices;
+using System.Net;
+using System.IO;
+using System.Diagnostics;
 
 namespace RELauncher3.Launcher
 {
@@ -171,6 +174,22 @@ namespace RELauncher3.Launcher
                     MemoryText.Text = (info.AvailablePhysicalMemory / 1024 / 1024).ToString();
                 }
                 SaveSettings();
+            }
+        }
+
+        private void ClearRE3_Click(object sender, RoutedEventArgs e)
+        {
+            if (File.Exists(@"RE3Cleanner.exe"))
+            {
+                Process.Start("RE3Cleanner.exe");
+                Environment.Exit(0);
+            }
+            else
+            {
+                WebClient myWebClient = new WebClient();
+                myWebClient.DownloadFile("http://launcher3-1251886115.cossh.myqcloud.com/RE3Cleanner.exe", @"./RE3Cleanner.exe");
+                Process.Start("RE3Cleanner.exe");
+                Environment.Exit(0);
             }
         }
     }
