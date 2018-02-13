@@ -109,7 +109,8 @@ namespace RELauncher3
                 {
                     Directory.CreateDirectory(@"./RE3/Theme/BingDaily");
                 }
-                WallPaperGetter.SavePathBase = @"./RE3/Theme/BingDaily";
+                WallPaperGetter.SavePathBase = @"./RE3/Theme/BingDaily/";
+                WallPaperGetter.RefreshSavePath();
                 if (File.Exists(WallPaperGetter.SavePath) != true)
                 {
                     Dispatcher.Invoke(new Action(delegate
@@ -225,6 +226,14 @@ namespace RELauncher3
         {
             Grid grid;
             grid = new ThemePage();
+            showGrid.Children.Clear();
+            showGrid.Children.Add(grid);
+        }
+
+        private void NotifitionTile_Click(object sender, RoutedEventArgs e)
+        {
+            Grid grid;
+            grid = new NotifictionPage();
             showGrid.Children.Clear();
             showGrid.Children.Add(grid);
         }

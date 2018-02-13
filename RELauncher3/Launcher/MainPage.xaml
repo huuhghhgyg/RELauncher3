@@ -68,8 +68,8 @@
                     Width="210" Height="100" Margin="10,10,3,3" HorizontalAlignment="Left" VerticalAlignment="Top" Click="VersionTile_Click">
                     <Controls:TransitioningContentControl x:Name="UpdateInfo" Width="160" Height="35" Transition="Down" Content="已是最新版本" FontSize="26.667" HorizontalAlignment="Center" HorizontalContentAlignment="Center"/>
                 </Controls:Tile>
-                <Controls:Tile Title="通知" TiltFactor="2" Width="208" Height="210" 
-        	Count="" Margin="10,10,3,3" VerticalAlignment="Top" HorizontalAlignment="Left" FontSize="16">
+                <Controls:Tile x:Name="NotifitionTile" Title="通知" TiltFactor="2" Width="208" Height="210" 
+        	Count="" Margin="10,10,3,3" VerticalAlignment="Top" HorizontalAlignment="Left" FontSize="16" Click="NotifitionTile_Click">
                     <Rectangle Fill="White" Width="70" Height="70">
                         <Rectangle.OpacityMask>
                             <VisualBrush Visual="{StaticResource appbar_newspaper_create}" Stretch="Uniform" />

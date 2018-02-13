@@ -20,6 +20,8 @@
                 </Rectangle.OpacityMask>
             </Rectangle>
         </Controls:Tile>
+        <TextBlock x:Name="textBlock" HorizontalAlignment="Left" Margin="73,10,0,440" TextWrapping="Wrap" Text="设置" FontSize="16"/>
+
         <TabControl x:Name="SettingsControl"
                     Controls:TabControlHelper.Underlined="TabPanel" TabStripPlacement="Left" Margin="0,40,0,0">
             <TabItem x:Name="PlayerItem" Header=" 玩家信息     ">
@@ -101,7 +103,7 @@
                     <TextBox x:Name="GameHeightText" HorizontalAlignment="Left" Height="23" Margin="177,224,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"
                              Controls:TextBoxHelper.Watermark="窗口宽度"/>
                     <TextBlock x:Name="textBlock4" HorizontalAlignment="Left" Margin="160,225,0,0" TextWrapping="Wrap" Text="×" VerticalAlignment="Top" FontSize="16" Height="26"/>
-                    <Button x:Name="ClearRE3" Content="清除缓存" HorizontalAlignment="Left" Margin="35,285,0,0" VerticalAlignment="Top" Width="75" Click="ClearRE3_Click"/>
+                    <Button x:Name="ClearRE3" Content="清除程序缓存" HorizontalAlignment="Left" Margin="35,285,0,0" VerticalAlignment="Top" Width="75" Click="ClearRE3_Click"/>
 
                 </Grid>
             </TabItem>
@@ -109,7 +111,6 @@
                 <Grid Background="White"/>
             </TabItem>
         </TabControl>
-        <TextBlock x:Name="textBlock" HorizontalAlignment="Left" Margin="73,10,0,440" TextWrapping="Wrap" Text="设置" FontSize="16"/>
 
     </Grid>
 </Grid>

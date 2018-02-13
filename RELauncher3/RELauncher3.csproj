@@ -113,6 +113,9 @@
     <Compile Include="Launcher\MCVersion.xaml.cs">
       <DependentUpon>MCVersion.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Launcher\NotifictionPage.xaml.cs">
+      <DependentUpon>NotifictionPage.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Launcher\Settings.xaml.cs">
       <DependentUpon>Settings.xaml</DependentUpon>
     </Compile>
@@ -155,6 +158,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Launcher\MCVersion.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Launcher\NotifictionPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

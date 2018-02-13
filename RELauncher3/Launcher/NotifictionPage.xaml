@@ -1,0 +1,30 @@
+﻿<Grid x:Class="RELauncher3.Launcher.NotifictionPage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:RELauncher3.Launcher"
+      xmlns:Controls="http://metro.mahapps.com/winfx/xaml/controls"
+      mc:Ignorable="d" 
+      d:DesignHeight="470" d:DesignWidth="900">
+
+    <Grid x:Name="showGrid" Background="White">
+        <!--Controller-->
+        <Controls:Tile x:Name="BackTile" Width="60" Height="40" HorizontalAlignment="Left" Margin="0" Foreground="{x:Null}" VerticalAlignment="Top" Click="BackTile_Click">
+            <Rectangle Fill="White" Width="20" Height="20">
+                <Rectangle.OpacityMask>
+                    <VisualBrush Visual="{StaticResource appbar_arrow_left}" Stretch="Uniform" />
+                </Rectangle.OpacityMask>
+            </Rectangle>
+        </Controls:Tile>
+        <TextBlock x:Name="textBlock" HorizontalAlignment="Left" Margin="73,10,0,440" TextWrapping="Wrap" Text="通知" FontSize="16"/>
+        <!--Controller-->
+
+        <Grid Margin="0,40,0,0">
+            <ScrollViewer>
+                <TextBlock x:Name="NoticeBlock" TextWrapping="Wrap" Margin="10,10,10,0" FontSize="16"/>
+            </ScrollViewer>
+        </Grid>
+        <Controls:ProgressRing x:Name="Progressring"/>
+    </Grid>
+</Grid>
