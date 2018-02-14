@@ -47,6 +47,7 @@ namespace RELauncher3.start
             comboBox.Items.Add("Mauve");
             comboBox.Items.Add("Taupe");
             comboBox.Items.Add("Sienna");
+            comboBox.SelectedIndex = 2;
         }
 
         private void comboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)

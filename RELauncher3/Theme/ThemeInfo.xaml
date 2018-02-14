@@ -32,6 +32,7 @@
                 <TextBlock x:Name="ThemeDescribtion" FontSize="16" Text="ThemeDescribtion" Margin="20,490,100,10"/>
                 <Image x:Name="IconBox" HorizontalAlignment="Left" Height="100" Margin="20,30,0,0" VerticalAlignment="Top" Width="100"/>
                 <TextBlock x:Name="AuthorBox" HorizontalAlignment="Left" Margin="130,90,0,0" TextWrapping="Wrap" Text="Author" VerticalAlignment="Top" FontSize="20"/>
+                <Controls:ProgressRing x:Name="LoadingPictureRing" Margin="278,257,548,333"/>
             </Grid>
         </ScrollViewer>
         <Controls:Flyout x:Name="TipBoard" Header="MessageHere!" Position="Bottom" AutoCloseInterval="2500" IsAutoCloseEnabled="True">

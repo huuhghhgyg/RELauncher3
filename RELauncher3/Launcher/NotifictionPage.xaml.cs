@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Net;
+using System.Net.Http;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
@@ -29,15 +30,28 @@ namespace RELauncher3.Launcher
             Progressring.Visibility = Visibility.Visible;
             ServicePointManager.SecurityProtocol = SecurityProtocolType.Ssl3;
             ServicePointManager.SecurityProtocol = SecurityProtocolType.Tls12;
-
-
-            Notice = GetRequest("https://huuhghhgyg.github.io/RE3/Notifiction.txt");
-            NoticeBlock.Text = Notice;
-            Progressring.Visibility = Visibility.Hidden;
+            GetNoticeAsync();
+            //旧方法
+            //Notice = GetRequest("https://huuhghhgyg.github.io/RE3/Notifiction.txt");
         }
         string Notice;
 
-        static string GetRequest(string URL)//用于获取主题列表
+        async void GetNoticeAsync()
+        {
+            Notice = await GetRequestAsync("https://huuhghhgyg.github.io/RE3/Notifiction.txt");
+            NoticeBlock.Text = Notice;
+            Progressring.Visibility = Visibility.Hidden;
+        }
+
+        async Task<string> GetRequestAsync(string URL)
+        {
+            HttpClient httpClient = new HttpClient();
+            Task<string> getStringTask = httpClient.GetStringAsync(URL);
+            string result = await getStringTask;
+            return result;
+        }
+
+        static string GetRequest(string URL)//用于获取指定页面字符串（过时）
         {
             ServicePointManager.SecurityProtocol = SecurityProtocolType.Ssl3;
             ServicePointManager.SecurityProtocol = SecurityProtocolType.Tls12;

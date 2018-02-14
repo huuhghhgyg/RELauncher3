@@ -37,7 +37,6 @@ namespace RELauncher3.Theme
 
         async void GetPictureFromURL(string URL, Image image)
         {
-            await Task.Run(() => Thread.Sleep(0));
             var request = WebRequest.Create(URL);
             int ErrorNum = 0, AllErrorNum = 0;
 
@@ -45,7 +44,6 @@ namespace RELauncher3.Theme
             try
             {
                 using (var response = await request.GetResponseAsync())
-                using (var stream = response.GetResponseStream())
                 {
 
                     //var imgBrush = new ImageBrush();
@@ -77,7 +75,7 @@ namespace RELauncher3.Theme
                     goto RETRY;//重试
                 }
             }
-            await Task.Delay(0);
+            //await Task.Delay(0);
             ProgressRing.Visibility = Visibility.Hidden;
         }
 

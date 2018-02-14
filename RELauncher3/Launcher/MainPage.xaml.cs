@@ -155,7 +155,7 @@ namespace RELauncher3
         /// <summary>
         /// 软件版本在这里!!!!
         /// </summary>
-        protected static int ver = checkUpdate.Ver;
+        protected static double ver = checkUpdate.Ver;
 
         private void IfUpdate()//是否有更新
         {

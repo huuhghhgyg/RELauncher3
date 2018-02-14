@@ -4,6 +4,7 @@ using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Net;
+using System.Net.Http;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
@@ -27,8 +28,7 @@ namespace RELauncher3.Launcher
         public ThemePage()
         {
             InitializeComponent();
-            Thread LoadItem = new Thread(AddThemeItem);
-            LoadItem.Start();
+            AddThemeItem();
             LoadThemeList();
         }
 
@@ -48,12 +48,12 @@ namespace RELauncher3.Launcher
 
         string Info = "";
         string ThemeListOnce = "";
-        void AddThemeItem()
+        async void AddThemeItem()
         {
             ServicePointManager.SecurityProtocol = SecurityProtocolType.Ssl3;
             ServicePointManager.SecurityProtocol = SecurityProtocolType.Tls12;
 
-            ThemeListOnce = GetRequest("https://huuhghhgyg.github.io/RE3/Theme/ThemeList.content");
+            ThemeListOnce = await GetRequest("https://huuhghhgyg.github.io/RE3/Theme/ThemeList.content");
             string ThemeName = "", ThemeDir = "", ThemeIcon = "";//顺序也为 名字 目录 Icon
             while (ThemeListOnce != "")
             {
@@ -85,16 +85,13 @@ namespace RELauncher3.Launcher
             ThemeListOnce = ThemeListOnce.Substring(ThemeListOnce.IndexOf("\n") + 1);
         }
 
-        static string GetRequest(string URL)//用于获取主题列表
+        async Task<string> GetRequest(string URL)//用于获取主题列表
         {
             ServicePointManager.SecurityProtocol = SecurityProtocolType.Ssl3;
             ServicePointManager.SecurityProtocol = SecurityProtocolType.Tls12;
 
-            var request = (HttpWebRequest)WebRequest.Create(URL);
-            request.Timeout = 5000;
-            var response = (HttpWebResponse)request.GetResponse();
-            var responseString = new StreamReader(response.GetResponseStream()).ReadToEnd();
-            return responseString.ToString();
+            HttpClient client = new HttpClient();
+            return await client.GetStringAsync(URL);
         }
 
         private void BackTile_Click(object sender, RoutedEventArgs e)

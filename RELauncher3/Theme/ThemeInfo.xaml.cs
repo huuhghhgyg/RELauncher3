@@ -5,6 +5,7 @@ using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Net;
+using System.Net.Http;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
@@ -41,11 +42,7 @@ namespace RELauncher3.Theme
         string Info = "";
         async void GetThemeInfo()
         {
-            await Task.Run(() =>
-            {
-                ThemeInfo_str = GetRequest(dirURL + "/Theme.Info");//获取主题信息
-            });
-
+            ThemeInfo_str = await GetRequest(dirURL + "/Theme.Info");//获取主题信息
             while (ThemeInfo_str != "")
             {
                 count();//读下一行
@@ -60,10 +57,10 @@ namespace RELauncher3.Theme
                         count();
                         Image Picture1 = new Image();
 
-                        await Task.Run(() => Thread.Sleep(0));
-                        Picture1.Source = GetPicture2Image(dirURL + "/Picture1.png");
+                        //await Task.Run(() => Thread.Sleep(0));
+                        Picture1.Source = await GetPicture2ImageAsync(dirURL + "/Picture1.png");
                         PictureFlipView.BannerText = ThemeNameBlock.Text;
-                        await Task.Delay(0);
+                        //await Task.Delay(0);
 
                         PictureFlipView.Items.Add(Picture1);
                         break;
@@ -72,9 +69,9 @@ namespace RELauncher3.Theme
                         count();
                         Image Picture2 = new Image();
 
-                        await Task.Run(() => Thread.Sleep(0));
-                        Picture2.Source = GetPicture2Image(dirURL + "/Picture2.png");
-                        await Task.Delay(0);
+                        //await Task.Run(() => Thread.Sleep(0));
+                        Picture2.Source = await GetPicture2ImageAsync(dirURL + "/Picture2.png");
+                        //await Task.Delay(0);
 
                         PictureFlipView.Items.Add(Picture2);
                         break;
@@ -83,9 +80,9 @@ namespace RELauncher3.Theme
                         count();
                         Image Picture3 = new Image();
 
-                        await Task.Run(() => Thread.Sleep(0));
-                        Picture3.Source = GetPicture2Image(dirURL + "/Picture3.png");
-                        await Task.Delay(0);
+                        //await Task.Run(() => Thread.Sleep(0));
+                        Picture3.Source = await GetPicture2ImageAsync(dirURL + "/Picture3.png");
+                        //await Task.Delay(0);
 
                         PictureFlipView.Items.Add(Picture3);
                         break;
@@ -111,7 +108,8 @@ namespace RELauncher3.Theme
                         break;
                 }
             }
-            await Task.Delay(0);
+            //await Task.Delay(0);
+            LoadingPictureRing.Visibility = Visibility.Hidden;
         }
 
         void count()
@@ -135,18 +133,17 @@ namespace RELauncher3.Theme
 
         async void GetIconThread()
         {
-            await Task.Run(() => Thread.Sleep(100));
-            GetPictureFromURL(iconURL, IconBox);
-            await Task.Delay(100);
+            //await Task.Run(() => Thread.Sleep(100));
+            await GetPictureFromURL(iconURL, IconBox);
+            //await Task.Delay(100);
         }
 
-        BitmapImage GetPicture2Image(string URL)//将网址转换成iamge
+        async Task<BitmapImage> GetPicture2ImageAsync(string URL)//将网址转换成iamge
         {
             var request = WebRequest.Create(URL);
             request.Timeout = 5000;
 
-            using (var response = request.GetResponse())
-            using (var stream = response.GetResponseStream())
+            using (var response = await request.GetResponseAsync())
             {
                 var fullFilePath = @URL;
 
@@ -159,12 +156,10 @@ namespace RELauncher3.Theme
             }
         }
 
-        async void GetPictureFromURL(string URL, Image image)
+        async Task GetPictureFromURL(string URL, Image image)
         {
             var request = WebRequest.Create(URL);
-
             using (var response = await request.GetResponseAsync())
-            using (var stream = response.GetResponseStream())
             {
                 //var imgBrush = new ImageBrush();
                 //var bitmap = new BitmapImage();
@@ -189,13 +184,10 @@ namespace RELauncher3.Theme
             }
         }
 
-        static string GetRequest(string URL)//用于获取主题列表
+        async Task<string> GetRequest(string URL)//用于获取主题列表
         {
-            var request = (HttpWebRequest)WebRequest.Create(URL);
-            request.Timeout = 5000;
-            var response = (HttpWebResponse)request.GetResponse();
-            var responseString = new StreamReader(response.GetResponseStream()).ReadToEnd();
-            return responseString.ToString();
+            HttpClient client = new HttpClient();
+            return await client.GetStringAsync(URL);
         }
 
 

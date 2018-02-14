@@ -34,9 +34,7 @@ namespace RELauncher3.Launcher
             InitializeComponent();
 
             LoadingGrid.Visibility = Visibility.Visible;
-            Thread LoadItem = new Thread(AddThemeItem);
-            LoadItem.Start();
-
+            AddThemeItemAsync();
             //AddThemeItem();
             //GetPictureFromURL("https://huuhghhgyg.github.io/RE3/Theme/Orginal/Icon.jpg", ExampleGrid);
             LoadSettings();//读取设置
@@ -63,31 +61,27 @@ namespace RELauncher3.Launcher
             StartBoxIsBlack.IsChecked = bool.Parse(Settings.Default["StartBoxIsBlack"].ToString());//读取“开始”二字颜色
         }
 
-        void GetPictureFromURL(string URL, Grid grid)
+        async void GetPictureFromURL(string URL, Grid grid)
         {
-            var request = WebRequest.Create(URL);
-
-            using (var response = request.GetResponse())
-            using (var stream = response.GetResponseStream())
-            {
-                var imgBrush = new ImageBrush();
-                var bitmap = new BitmapImage();
-                bitmap.BeginInit();//开始设置属性
-                bitmap.StreamSource = stream;
-                bitmap.EndInit();//终止设置属性
-                imgBrush.ImageSource = bitmap;
-                grid.Background = imgBrush;
-            }
+            HttpClient client = new HttpClient();
+            var stream = await client.GetStreamAsync(URL);
+            var imgBrush = new ImageBrush();
+            var bitmap = new BitmapImage();
+            bitmap.BeginInit();//开始设置属性
+            bitmap.StreamSource = stream;
+            bitmap.EndInit();//终止设置属性
+            imgBrush.ImageSource = bitmap;
+            grid.Background = imgBrush;
         }
 
         string Info = "";
         string ThemeListOnce = "";
-        void AddThemeItem()
+        async void AddThemeItemAsync()
         {
             ServicePointManager.SecurityProtocol = SecurityProtocolType.Ssl3;
             ServicePointManager.SecurityProtocol = SecurityProtocolType.Tls12;
 
-            ThemeListOnce = GetRequest("https://huuhghhgyg.github.io/RE3/Theme/ThemeList.content");
+            ThemeListOnce = await GetRequest("https://huuhghhgyg.github.io/RE3/Theme/ThemeList.content");
             //ThemeListOnce = GetRequest("http://launcher3-1251886115.cossh.myqcloud.com/Theme/ThemeList.content");
             string ThemeName = "", ThemeDir = "", ThemeIcon = "";//顺序也为 名字 目录 Icon
             while (ThemeListOnce != "")
@@ -122,16 +116,13 @@ namespace RELauncher3.Launcher
             ThemeListOnce = ThemeListOnce.Substring(ThemeListOnce.IndexOf("\n") + 1);
         }
 
-        static string GetRequest(string URL)//用于获取主题列表
+        async Task<string> GetRequest(string URL)//用于获取主题列表
         {
             ServicePointManager.SecurityProtocol = SecurityProtocolType.Ssl3;
             ServicePointManager.SecurityProtocol = SecurityProtocolType.Tls12;
 
-            var request = (HttpWebRequest)WebRequest.Create(URL);
-            request.Timeout = 5000;
-            var response = (HttpWebResponse)request.GetResponse();
-            var responseString = new StreamReader(response.GetResponseStream()).ReadToEnd();
-            return responseString.ToString();
+            HttpClient client = new HttpClient();
+            return await client.GetStringAsync(URL);
         }
 
         void ChangeBackground(string Path)//更改主页背景
