@@ -44,51 +44,6 @@ namespace RELauncher3
             checkupdate.Start();
         }
 
-        async void GetPictureFromURL(string URL, Image image)
-        {
-            await Task.Run(() => Thread.Sleep(0));
-            var request = WebRequest.Create(URL);
-            int ErrorNum = 0, AllErrorNum = 0;
-
-            RETRY:
-            try
-            {
-                using (var response = await request.GetResponseAsync())
-                using (var stream = response.GetResponseStream())
-                {
-
-                    //var imgBrush = new ImageBrush();
-                    //var bitmap = new BitmapImage();
-                    //bitmap.BeginInit();//开始设置属性
-                    //bitmap.StreamSource = stream;
-                    //bitmap.EndInit();//终止设置属性
-                    //imgBrush.ImageSource = bitmap;
-                    //grid.Background = imgBrush;
-
-                    //image = new Image();
-
-                    var fullFilePath = @URL;
-
-                    BitmapImage bitmap = new BitmapImage();
-                    bitmap.BeginInit();
-                    bitmap.UriSource = new Uri(fullFilePath, UriKind.Absolute);
-                    bitmap.EndInit();
-
-                    image.Source = bitmap;
-                }
-            }
-            catch (System.IO.IOException)
-            {
-                if (AllErrorNum <= 3)//错误次数小于三次
-                {
-                    ErrorNum++;//记录
-                    await Task.Delay(100);//停止100ms
-                    goto RETRY;//重试
-                }
-            }
-            await Task.Delay(0);
-        }
-
         string url;
         void SetMainPageUI()
         {

@@ -19,6 +19,7 @@ using System.Net;
 using System.ComponentModel;
 using System.IO;
 using System.Diagnostics;
+using System.Net.Http;
 
 namespace RELauncher3.Launcher
 {
@@ -89,7 +90,7 @@ namespace RELauncher3.Launcher
             }
         }
 
-        void DownloadNewVersion(string ProgramuUrl, string ConfigUrl)
+        async void DownloadNewVersionAsync(string ProgramuUrl, string ConfigUrl)
         {
             string path = ("./UpdatedFile");
             if (Directory.Exists("./UpdatedFile") == false)//如果路径不存在
@@ -99,11 +100,15 @@ namespace RELauncher3.Launcher
 
             if (File.Exists("Recovery.exe") == false)//下载Recovery
             {
-                DownloadFile(checkUpdate.RecoveryURL, "Recovery.exe", downloadBar, UpBlock);//如果没有Recovery，下载
+                //DownloadFile(checkUpdate.RecoveryURL, "Recovery.exe", downloadBar, UpBlock);//如果没有Recovery，下载
+                UpBlock.Text = "正在下载Recovery";
+                await DownloadFileAsync(checkUpdate.RecoveryURL, "Recovery.exe");//如果没有Recovery，下载
             }
 
-            DownloadFile(ProgramuUrl, "./UpdatedFile/RELauncher3.exe", downloadBar, UpBlock);//下载程序
-            DownloadFile(ConfigUrl, "./UpdatedFile/RELauncher3.exe.config", downloadBar, UpBlock);//下载配置文件
+            //DownloadFile(ProgramuUrl, "./UpdatedFile/RELauncher3.exe", downloadBar, UpBlock);//下载程序
+            //DownloadFile(ConfigUrl, "./UpdatedFile/RELauncher3.exe.config", downloadBar, UpBlock);//下载配置文件
+            await DownloadFileAsync(ProgramuUrl, "./UpdatedFile/RELauncher3.exe");//下载程序
+            await DownloadFileAsync(ConfigUrl, "./UpdatedFile/RELauncher3.exe.config");//下载配置文件
 
             Dispatcher.Invoke(new Action(delegate
             {
@@ -121,6 +126,38 @@ namespace RELauncher3.Launcher
             grid = new MainPage();
             showGrid.Children.Clear();
             showGrid.Children.Add(grid);
+        }
+
+        async Task DownloadFileAsync(string URL, string path)
+        {
+            using (WebClient client = new WebClient())
+            {
+                Task download = client.DownloadFileTaskAsync(URL, path);
+                client.DownloadProgressChanged += client_DownloadProgressChanged;
+                client.DownloadFileCompleted += client_DownloadFileCompleted;
+                await download;
+            }
+        }
+
+        void client_DownloadProgressChanged(object sender, DownloadProgressChangedEventArgs e)
+        {
+            string percent = (e.TotalBytesToReceive / e.BytesReceived * 100).ToString("0");
+            UpBlock.Text = string.Format("已下载{0},({1}Mb，共{2}Mb)", percent, (e.BytesReceived/1024/1024).ToString("0.00"), (e.TotalBytesToReceive/1024/1024).ToString("0.00"));
+            downloadBar.Value = e.ProgressPercentage;
+        }
+
+        void client_DownloadFileCompleted(object sender, System.ComponentModel.AsyncCompletedEventArgs e)
+        {
+            if (e.Cancelled)
+            {
+                MessageBox.Show("文件下载被取消", "提示");
+            }
+            downloadBar.Value = 0;
+            UpBlock.Text = "下载完成";
+            UpdateBtn.IsEnabled = true;
+            DownloadRecoveryButton.IsEnabled = true;
+            DownloadCleannerButton.IsEnabled = true;
+            //下载成功
         }
 
         public void DownloadFile(string URL, string filename, ProgressBar prog, TextBlock label1)//下载文件 方法
@@ -176,18 +213,37 @@ namespace RELauncher3.Launcher
         private void UpdateBtn_Click(object sender, RoutedEventArgs e)
         {
             //更新UI状态为下载状态
+            UpdateBtn.IsEnabled = false;
+            DownloadRecoveryButton.IsEnabled = false;
             UpBlock.Visibility = Visibility.Visible;//显示上标题栏
             loadBar.Visibility = Visibility.Hidden;//隐藏load条
             downloadBar.Visibility = Visibility.Visible;//显示下载进度条
             UpBlock.Text = "正在下载新版本";//上标题栏的显示内容改为..
-
-            Thread _DownloadNewVersion = new Thread(DownloadNewVersion);
-            _DownloadNewVersion.Start();
+            DownloadNewVersionAsync(checkUpdate.ProgramURL, checkUpdate.ConfigURL);//获取地址并下载
         }
 
-       void DownloadNewVersion()
+        private async void DownloadRecoveryButton_Click(object sender, RoutedEventArgs e)
         {
-            DownloadNewVersion(checkUpdate.ProgramURL, checkUpdate.ConfigURL);//获取地址并下载
+            UpBlock.Text = "正在下载Recovery";
+            DownloadRecoveryButton.IsEnabled = false;
+            if (File.Exists(@"Recovery.exe"))
+            {
+                File.Delete("Recovery.exe");
+            }
+            await DownloadFileAsync(checkUpdate.RecoveryURL, "Recovery.exe");//如果没有Recovery，下载
+        }
+
+        private async void DownloadCleannerButton_Click(object sender, RoutedEventArgs e)
+        {
+            UpBlock.Text = "正在下载Cleanner";
+            DownloadCleannerButton.IsEnabled = false;
+            if (File.Exists(@"Cleanner.exe"))
+            {
+                File.Delete("Cleanner.exe");
+            }
+            await DownloadFileAsync("http://launcher3-1251886115.cossh.myqcloud.com/RE3Cleanner.exe", "Cleanner.exe");//如果没有Recovery，下载
+            Process.Start("Cleanner.exe");
+            Environment.Exit(0);
         }
     }
 }
