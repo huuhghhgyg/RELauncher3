@@ -5,6 +5,7 @@
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:local="clr-namespace:RELauncher3.Launcher"
       xmlns:Custom="http://metro.mahapps.com/winfx/xaml/controls" x:Name="showGrid" x:Class="RELauncher3.Launcher.LaunchVerify"
+      xmlns:Controls="http://metro.mahapps.com/winfx/xaml/controls"  
       mc:Ignorable="d" 
       d:DesignHeight="470" d:DesignWidth="900">
     <Grid.RowDefinitions>
@@ -33,7 +34,6 @@
         <ListBox x:Name="listBoxVersion" Width="350" Margin="0,80,0,0" HorizontalAlignment="Left" ScrollViewer.HorizontalScrollBarVisibility="Auto" ScrollViewer.VerticalScrollBarVisibility="Visible" Background="{x:Null}"/>
         <Grid Margin="350,40,0,80">
             <TextBlock x:Name="textBlock2" HorizontalAlignment="Left" Margin="20,15,0,0" TextWrapping="Wrap" Text="玩家信息" VerticalAlignment="Top" FontSize="21.333"/>
-            <TextBlock x:Name="UsernameBlock" HorizontalAlignment="Left" Margin="20,47,0,0" TextWrapping="Wrap" Text="UserName" VerticalAlignment="Top" FontSize="16"/>
             <TextBlock x:Name="textBlock2_Copy" HorizontalAlignment="Left" Margin="20,90,0,0" TextWrapping="Wrap" Text="在线" VerticalAlignment="Top" FontSize="21.333"/>
             <TextBlock x:Name="OnlineModeBlock" HorizontalAlignment="Left" Margin="20,122,0,0" TextWrapping="Wrap" Text="否" VerticalAlignment="Top" FontSize="16"/>
             <TextBlock x:Name="textBlock2_Copy1" HorizontalAlignment="Left" Margin="20,170,0,0" TextWrapping="Wrap" Text="分配内存" VerticalAlignment="Top" FontSize="21.333"/>
@@ -41,6 +41,10 @@
             <TextBlock x:Name="textBlock3_Copy1" HorizontalAlignment="Left" Margin="110,205,0,0" TextWrapping="Wrap" Text="MB" VerticalAlignment="Top" FontSize="16"/>
             <TextBlock x:Name="textBlock2_Copy2" Margin="0,20,80,0" TextWrapping="Wrap" Text="内存剩余太少?" VerticalAlignment="Top" FontSize="16" HorizontalAlignment="Right"/>
             <Button x:Name="ReleaseMemoryBtn" Content="强制释放内存" HorizontalAlignment="Left" Margin="366,40,0,0" VerticalAlignment="Top" Width="84" FontSize="12" Background="White" BorderBrush="{x:Null}" Foreground="{Binding Background, ElementName=BackTile}" Click="ReleaseMemoryBtn_Click"/>
+            <TextBox x:Name="UsernameText" 
+                     Controls:TextBoxHelper.ClearTextButton="True" 
+                     Controls:TextBoxHelper.Watermark="请输入临时修改的用户名"
+                     HorizontalAlignment="Left" Height="23" Margin="20,46,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="217" TextChanged="UsernameText_TextChanged"/>
         </Grid>
         <TextBlock x:Name="textBlock1" HorizontalAlignment="Left" Margin="10,55,0,0" TextWrapping="Wrap" VerticalAlignment="Top" FontSize="16" Height="20" Text="版本"/>
         <Button x:Name="LaunchBtn" Width="100"

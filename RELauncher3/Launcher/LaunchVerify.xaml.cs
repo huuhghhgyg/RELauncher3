@@ -35,7 +35,8 @@ namespace RELauncher3.Launcher
             listBoxVersion.ItemsSource = versions;
             listBoxVersion.DisplayMemberPath = "Id";
 
-            UsernameBlock.Text = Settings.Default["UserName"].ToString();
+            username = Settings.Default["UserName"].ToString();
+            UsernameText.Text = username;
             OnlineModeBlock.Text = Settings.Default["OnlineAccount"].ToString();
             if (Settings.Default["AutoSetMemory"].ToString() == "true")
             {
@@ -51,6 +52,7 @@ namespace RELauncher3.Launcher
             }
         }
 
+        string username;//用户名
         private void BackTile_Click(object sender, RoutedEventArgs e)
         {
             Grid grid;
@@ -61,16 +63,23 @@ namespace RELauncher3.Launcher
 
         private void LauchBtn_Click(object sender, RoutedEventArgs e)
         {
-            if (listBoxVersion.SelectedItem != null)
+            if(username != "")
             {
-                Thread launch = new Thread(LaunchGame);
-                launch.IsBackground = true;
-                launch.Start();
+                if (listBoxVersion.SelectedItem != null)
+                {
+                    Thread launch = new Thread(LaunchGame);
+                    launch.IsBackground = true;
+                    launch.Start();
+                }
+                else
+                {
+                    //提示请选择版本
+                    PopupMessage("请选择要启动的版本");
+                }
             }
             else
             {
-                //提示请选择版本
-                PopupMessage("请选择要启动的版本");
+                PopupMessage("临时修改的用户名也不能为空");
             }
         }
 
@@ -85,7 +94,7 @@ namespace RELauncher3.Launcher
 
             Dispatcher.Invoke(new Action(delegate
             {
-                string username = Settings.Default["UserName"].ToString();//用户名
+                //string username = Settings.Default["UserName"].ToString();//用户名
                 string password = Settings.Default["Password"].ToString();//密码
                 bool isTwitch = bool.Parse(Settings.Default["TwitchLogin"].ToString());//是否登录twitch
 
@@ -220,6 +229,11 @@ namespace RELauncher3.Launcher
 
             Settings.Default["Memory"] = MemoryText.Text;
             Settings.Default.Save();
+        }
+
+        private void UsernameText_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            username = UsernameText.Text;
         }
     }
 }
