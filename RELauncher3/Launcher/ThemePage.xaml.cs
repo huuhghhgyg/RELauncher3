@@ -34,7 +34,7 @@ namespace RELauncher3.Launcher
 
         void LoadThemeList()
         {
-            if(Directory.Exists(@"./RE3/Theme"))
+            if (Directory.Exists(@"./RE3/Theme"))
             {
                 string[] ThemeList = Directory.GetDirectories(@"./RE3/Theme");
                 ThemeListBox.Items.Clear();//清除所有项目
@@ -67,15 +67,10 @@ namespace RELauncher3.Launcher
                 {
                     count();
                 }
-                Dispatcher.Invoke(new Action(delegate
-                {
-                    ThemeList.Children.Add(new Theme.ThemeItem(ThemeIcon, ThemeName, ThemeDir));
-                }));
+                ThemeList.Children.Add(new Theme.ThemeItem(ThemeIcon, ThemeName, ThemeDir));
                 //MSGBox.Text += s + "\n";
-                Dispatcher.Invoke(new Action(delegate
-                {
-                    LoadingGrid.Visibility = Visibility.Hidden;
-                }));
+                LoadingGrid.Visibility = Visibility.Hidden;
+                LoadingRing.Visibility = Visibility.Hidden;
             }
         }
 

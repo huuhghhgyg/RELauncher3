@@ -31,6 +31,7 @@
                 <TextBlock x:Name="ThemedescribtionTitle" FontSize="25" Text="介绍" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="20,450,0,0"/>
                 <TextBlock x:Name="ThemeDescribtion" FontSize="16" Text="ThemeDescribtion" Margin="20,490,100,10"/>
                 <Image x:Name="IconBox" HorizontalAlignment="Left" Height="100" Margin="20,30,0,0" VerticalAlignment="Top" Width="100"/>
+                <Controls:ProgressRing Name="LoadingIconRing" Margin="45,55,792,545" Width="50" Height="50"/>
                 <TextBlock x:Name="AuthorBox" HorizontalAlignment="Left" Margin="130,90,0,0" TextWrapping="Wrap" Text="Author" VerticalAlignment="Top" FontSize="20"/>
                 <Controls:ProgressRing x:Name="LoadingPictureRing" Margin="278,257,548,333"/>
             </Grid>

@@ -56,34 +56,22 @@ namespace RELauncher3.Theme
                     case "Picture1":
                         count();
                         Image Picture1 = new Image();
-
-                        //await Task.Run(() => Thread.Sleep(0));
                         Picture1.Source = await GetPicture2ImageAsync(dirURL + "/Picture1.png");
                         PictureFlipView.BannerText = ThemeNameBlock.Text;
-                        //await Task.Delay(0);
-
                         PictureFlipView.Items.Add(Picture1);
                         break;
 
                     case "Picture2":
                         count();
                         Image Picture2 = new Image();
-
-                        //await Task.Run(() => Thread.Sleep(0));
                         Picture2.Source = await GetPicture2ImageAsync(dirURL + "/Picture2.png");
-                        //await Task.Delay(0);
-
                         PictureFlipView.Items.Add(Picture2);
                         break;
 
                     case "Picture3":
                         count();
                         Image Picture3 = new Image();
-
-                        //await Task.Run(() => Thread.Sleep(0));
                         Picture3.Source = await GetPicture2ImageAsync(dirURL + "/Picture3.png");
-                        //await Task.Delay(0);
-
                         PictureFlipView.Items.Add(Picture3);
                         break;
 
@@ -108,7 +96,6 @@ namespace RELauncher3.Theme
                         break;
                 }
             }
-            //await Task.Delay(0);
             LoadingPictureRing.Visibility = Visibility.Hidden;
         }
 
@@ -133,9 +120,8 @@ namespace RELauncher3.Theme
 
         async void GetIconThread()
         {
-            //await Task.Run(() => Thread.Sleep(100));
             await GetPictureFromURL(iconURL, IconBox);
-            //await Task.Delay(100);
+            LoadingIconRing.Visibility = Visibility.Hidden;
         }
 
         async Task<BitmapImage> GetPicture2ImageAsync(string URL)//将网址转换成iamge
@@ -177,10 +163,7 @@ namespace RELauncher3.Theme
                 bitmap.UriSource = new Uri(fullFilePath, UriKind.Absolute);
                 bitmap.EndInit();
 
-                Dispatcher.Invoke(new Action(delegate
-                {
-                    image.Source = bitmap;
-                }));
+                image.Source = bitmap;
             }
         }
 

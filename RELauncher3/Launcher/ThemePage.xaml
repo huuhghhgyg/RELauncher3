@@ -28,8 +28,8 @@
                             <WrapPanel x:Name="ThemeList" ScrollViewer.VerticalScrollBarVisibility="Disabled">
                             </WrapPanel>
                         </ScrollViewer>
-                        <Grid x:Name="LoadingGrid" Visibility="Hidden">
-                            <Controls:ProgressRing/>
+                        <Grid x:Name="LoadingGrid">
+                            <Controls:ProgressRing Name="LoadingRing"/>
                             <TextBlock Text="请稍候" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="0,100,0,0" FontSize="16"/>
                         </Grid>
                     </Grid>
