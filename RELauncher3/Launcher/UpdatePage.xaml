@@ -52,9 +52,9 @@
         <Button x:Name="UpdateBtn" Width="100"
                     Content="更新"
                     Style="{DynamicResource SquareButtonStyle}" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="60,160,0,0" Background="#FFCCCCCC" BorderBrush="{x:Null}" FontSize="14" Click="UpdateBtn_Click" />
-        <TextBlock HorizontalAlignment="Right" TextWrapping="Wrap" Text="总是安装更新失败？" VerticalAlignment="Top" Margin="0,65,0,0" FontSize="20" Width="280"/>
-        <Button x:Name="DownloadRecoveryButton" Content="下载/重新下载Recovery" HorizontalAlignment="Right" Margin="0,92,93,0" VerticalAlignment="Top" Width="197" BorderBrush="White" Background="White" FontSize="14" FontWeight="Normal" Foreground="{Binding Background, ElementName=BackTile}" FontFamily="Microsoft YaHei UI" Click="DownloadRecoveryButton_Click"/>
-        <TextBlock HorizontalAlignment="Right" TextWrapping="Wrap" Text="莫名其妙的错误？" VerticalAlignment="Top" Margin="0,132,0,0" FontSize="20" Width="280"/>
-        <Button x:Name="DownloadCleannerButton" Content="下载/重新下载并打开清理器" HorizontalAlignment="Right" Margin="0,157,89,0" VerticalAlignment="Top" Width="196" BorderBrush="White" Background="White" FontSize="14" FontWeight="Normal" Foreground="{Binding Background, ElementName=BackTile}" FontFamily="Microsoft YaHei UI" Click="DownloadCleannerButton_Click"/>
+        <TextBlock HorizontalAlignment="Right" TextWrapping="Wrap" Text="总是安装更新失败？" VerticalAlignment="Top" Margin="0,65,0,0" FontSize="20" Width="200"/>
+        <Button x:Name="DownloadRecoveryButton" Content="下载/重新下载Recovery" HorizontalAlignment="Right" Margin="0,92,20,0" VerticalAlignment="Top" Width="197" BorderBrush="White" Background="White" FontSize="14" FontWeight="Normal" Foreground="{Binding Background, ElementName=BackTile}" FontFamily="Microsoft YaHei UI" Click="DownloadRecoveryButton_Click"/>
+        <TextBlock HorizontalAlignment="Right" TextWrapping="Wrap" Text="莫名其妙的错误？" VerticalAlignment="Top" Margin="0,132,0,0" FontSize="20" Width="200"/>
+        <Button x:Name="DownloadCleannerButton" Content="下载/重新下载并打开清理器" HorizontalAlignment="Right" Margin="0,157,16,0" VerticalAlignment="Top" Width="196" BorderBrush="White" Background="White" FontSize="14" FontWeight="Normal" Foreground="{Binding Background, ElementName=BackTile}" FontFamily="Microsoft YaHei UI" Click="DownloadCleannerButton_Click"/>
     </Grid>
 </Grid>
