@@ -26,8 +26,8 @@
                 <Controls:FlipView x:Name="PictureFlipView" Width="600" Height="300" Margin="20,140,0,0" VerticalAlignment="Top" HorizontalAlignment="Left"/>
                 <Button x:Name="InstallBtn" Width="100"
                 Content="应用"
-                Style="{DynamicResource AccentedSquareButtonStyle}" Margin="0,45,50,0" HorizontalAlignment="Right" Height="31" VerticalAlignment="Top" BorderBrush="{x:Null}" Click="InstallBtn_Click" />
-                <Controls:ProgressRing x:Name="ProgressringLoading" Visibility="Hidden" Margin="841,45,15,575" Width="30" Height="30"/>
+                Style="{DynamicResource AccentedSquareButtonStyle}" Margin="0,45,50,0" HorizontalAlignment="Right" Height="31" VerticalAlignment="Top" BorderBrush="{x:Null}" Click="InstallBtn_Click" IsEnabled="False" />
+                <Controls:ProgressRing x:Name="ProgressringLoading" Margin="0,45,15,0" Width="30" Height="30" HorizontalAlignment="Right" VerticalAlignment="Top"/>
                 <TextBlock x:Name="ThemedescribtionTitle" FontSize="25" Text="介绍" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="20,450,0,0"/>
                 <TextBlock x:Name="ThemeDescribtion" FontSize="16" Text="ThemeDescribtion" Margin="20,490,100,10"/>
                 <Image x:Name="IconBox" HorizontalAlignment="Left" Height="100" Margin="20,30,0,0" VerticalAlignment="Top" Width="100"/>

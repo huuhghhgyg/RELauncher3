@@ -67,15 +67,17 @@ namespace RELauncher3
                 }
                 WallPaperGetter.SavePathBase = @"./RE3/Theme/BingDaily/";
                 WallPaperGetter.RefreshSavePath();
-                if (File.Exists(WallPaperGetter.SavePath) != true)
+
+                if (File.Exists(WallPaperGetter.SavePath) != true)//不存在路径
                 {
                         WallPaperGetter.GetWallPaperUrl();
                         url = "https://" + WallPaperGetter.WallPaperUrl;
                     //WallPaperGetter.DownloadFile();
                     await DownloadFileAsync(url, WallPaperGetter.SavePath);
-                        Settings.Default["BGPPath"] = WallPaperGetter.SavePath;//设置背景图片路径
-                        Settings.Default.Save();//保存路径
+                    //Settings.Default["BGPPath"] = WallPaperGetter.SavePath;//设置背景图片路径
                 }
+                Settings.Default["BGPPath"] = WallPaperGetter.SavePath;//设置背景图片路径
+                Settings.Default.Save();//保存路径
             }
 
             //更改背景图片
@@ -208,8 +210,8 @@ namespace RELauncher3
 
         void client_DownloadProgressChanged(object sender, DownloadProgressChangedEventArgs e)
         {
-            double progress= (e.TotalBytesToReceive / e.BytesReceived * 100);//下载百分比
-            LaunchProgressbar.Value = progress;
+            string percent = ((double)e.BytesReceived / (double)e.TotalBytesToReceive * 100).ToString("0");
+            LaunchProgressbar.Value = double.Parse(percent);
             if (LaunchProgressbar.Value == LaunchProgressbar.Maximum)
             {
                 LaunchProgressbar.Visibility = Visibility.Hidden;

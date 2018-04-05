@@ -96,7 +96,9 @@ namespace RELauncher3.Theme
                         break;
                 }
             }
-            LoadingPictureRing.Visibility = Visibility.Hidden;
+            LoadingPictureRing.Visibility = Visibility.Hidden;//隐藏加载图片的progressring
+            ProgressringLoading.Visibility = Visibility.Hidden;
+            InstallBtn.IsEnabled = true;//启用下载按钮
         }
 
         void count()

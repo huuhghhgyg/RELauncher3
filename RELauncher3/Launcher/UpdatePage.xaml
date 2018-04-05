@@ -47,7 +47,7 @@
                 </Rectangle.OpacityMask>
             </Rectangle>
         </Grid>
-        <TextBlock x:Name="UpBlock" HorizontalAlignment="Left" Margin="127,104,0,0" TextWrapping="Wrap" Text="已安装最新更新" VerticalAlignment="Top" FontSize="16"/>
+        <TextBlock x:Name="UpBlock" HorizontalAlignment="Left" Margin="127,104,0,0" TextWrapping="Wrap" Text="检查更新中" VerticalAlignment="Top" FontSize="16"/>
 
         <Button x:Name="UpdateBtn" Width="100"
                     Content="更新"

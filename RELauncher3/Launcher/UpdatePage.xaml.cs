@@ -42,7 +42,7 @@ namespace RELauncher3.Launcher
             CU.Start();//开始线程
 
             downloadBar.Visibility = Visibility.Hidden;//隐藏下载进度条
-            isNewestVersionIcon.Visibility = Visibility.Hidden;//显示对号
+            isNewestVersionIcon.Visibility = Visibility.Hidden;//隐藏对号
         }
 
         void CheckUpdate()//检查更新方法
@@ -76,6 +76,7 @@ namespace RELauncher3.Launcher
                         loadBar.Visibility = Visibility.Hidden;//隐藏load条
                         UpBlock.Visibility = Visibility.Visible;//显示上标题栏
                         isNewestVersionIcon.Visibility = Visibility.Visible;//显示勾号
+                        UpBlock.Text = "您使用的是最新版本";
                     }));//更新UI（最新版本状态）
                 }
             }
@@ -92,6 +93,7 @@ namespace RELauncher3.Launcher
 
         async void DownloadNewVersionAsync(string ProgramuUrl, string ConfigUrl)
         {
+            UpdateBtn.IsEnabled = false;
             string path = ("./UpdatedFile");
             if (Directory.Exists("./UpdatedFile") == false)//如果路径不存在
             {
@@ -141,8 +143,8 @@ namespace RELauncher3.Launcher
 
         void client_DownloadProgressChanged(object sender, DownloadProgressChangedEventArgs e)
         {
-            string percent = (e.TotalBytesToReceive / e.BytesReceived * 100).ToString("0");
-            UpBlock.Text = string.Format("已下载{0},({1}Mb，共{2}Mb)", percent, (e.BytesReceived/1024/1024).ToString("0.00"), (e.TotalBytesToReceive/1024/1024).ToString("0.00"));
+            string percent = ((double)e.BytesReceived / (double)e.TotalBytesToReceive * 100).ToString("0");
+            UpBlock.Text = string.Format("已下载{0}%,({1}Mb，共{2}Mb)", percent, ((double)e.BytesReceived / 1024 / 1024).ToString("0.00"), ((double)e.TotalBytesToReceive / 1024 / 1024).ToString("0.00"));
             downloadBar.Value = e.ProgressPercentage;
         }
 

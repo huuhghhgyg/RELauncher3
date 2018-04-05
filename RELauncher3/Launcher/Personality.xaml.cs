@@ -141,7 +141,7 @@ namespace RELauncher3.Launcher
             showGrid.Children.Add(grid);
         }
 
-        void ChangeColor(MahApps.Metro.Controls.Tile TileName)
+        void ChangeColor(Tile TileName)
         {
             string _TileName = TileName.Name;//获取Tile的名称
             string ColorName = _TileName.Substring(0, _TileName.Length - 4);//获取Tile的工作颜色
