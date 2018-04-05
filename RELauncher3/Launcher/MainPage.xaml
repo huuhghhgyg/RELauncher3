@@ -112,4 +112,9 @@
             </WrapPanel>
         </Grid>
     </ScrollViewer>
+    <Grid x:Name="LaunchGrid" Background="White" Visibility="Visible">
+        <Controls:ProgressRing x:Name="LaunchProgressring" VerticalAlignment="Center" Margin="0,250,0,0" Width="50" Height="50" Visibility="Hidden"></Controls:ProgressRing>
+        <Image Source="/RELauncher3;component/re2ico.ico" Width="200" Height="200" VerticalAlignment="Center" Margin="0,0,0,50"></Image>
+        <Controls:MetroProgressBar x:Name="LaunchProgressbar" Width="300" Margin="0,250,0,0" Foreground="{Binding Background, ElementName=UserNameTile}"/>
+    </Grid>
 </Grid>

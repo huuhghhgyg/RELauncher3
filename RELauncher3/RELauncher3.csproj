@@ -294,9 +294,6 @@
     <None Include="FodyWeavers.xml" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="icon.ico" />
-  </ItemGroup>
-  <ItemGroup>
     <Resource Include="re2ico.ico" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

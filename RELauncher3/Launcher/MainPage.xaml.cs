@@ -45,8 +45,9 @@ namespace RELauncher3
         }
 
         string url;
-        void SetMainPageUI()
+        async void SetMainPageUI()
         {
+            LaunchGrid.Visibility = Visibility.Visible;
             UserNameTile.Content = Settings.Default["UserName"].ToString();//磁块上显示用户名
             if (bool.Parse(Settings.Default["OnlineAccount"].ToString()) == true)//磁块显示验证模式
             {
@@ -68,14 +69,12 @@ namespace RELauncher3
                 WallPaperGetter.RefreshSavePath();
                 if (File.Exists(WallPaperGetter.SavePath) != true)
                 {
-                    Dispatcher.Invoke(new Action(delegate
-                    {
                         WallPaperGetter.GetWallPaperUrl();
                         url = "https://" + WallPaperGetter.WallPaperUrl;
-                        WallPaperGetter.DownloadFile();
+                    //WallPaperGetter.DownloadFile();
+                    await DownloadFileAsync(url, WallPaperGetter.SavePath);
                         Settings.Default["BGPPath"] = WallPaperGetter.SavePath;//设置背景图片路径
                         Settings.Default.Save();//保存路径
-                    }));
                 }
             }
 
@@ -94,6 +93,9 @@ namespace RELauncher3
                     showGrid.Background = Brushes.Black;
                 }
             }
+
+            //完成!
+            LaunchGrid.Visibility = Visibility.Hidden;
         }
 
         void ChangeBackground(string Path)//更改主页背景
@@ -192,5 +194,35 @@ namespace RELauncher3
             showGrid.Children.Clear();
             showGrid.Children.Add(grid);
         }
+
+        async Task DownloadFileAsync(string URL,string path)
+        {
+            using (WebClient client = new WebClient())
+            {
+                Task download = client.DownloadFileTaskAsync(URL, path);
+                client.DownloadProgressChanged += client_DownloadProgressChanged;
+                client.DownloadFileCompleted += client_DownloadFileCompleted;
+                await download;
+            }
+        }
+
+        void client_DownloadProgressChanged(object sender, DownloadProgressChangedEventArgs e)
+        {
+            double progress= (e.TotalBytesToReceive / e.BytesReceived * 100);//下载百分比
+            LaunchProgressbar.Value = progress;
+            if (LaunchProgressbar.Value == LaunchProgressbar.Maximum)
+            {
+                LaunchProgressbar.Visibility = Visibility.Hidden;
+                LaunchProgressring.Visibility = Visibility.Visible;
+            }
+        }
+
+        void client_DownloadFileCompleted(object sender, System.ComponentModel.AsyncCompletedEventArgs e)
+        {
+            //下载成功
+            LaunchProgressbar.Visibility = Visibility.Hidden;
+            LaunchProgressring.Visibility = Visibility.Visible;
+        }
+
     }
 }
