@@ -62,6 +62,13 @@
                                 HorizontalAlignment="Right"
                                 Orientation="Horizontal"/>
                         </Controls:Flyout>
+                        <Controls:Tile x:Name="InstallThemeButton" Width="40" Height="40" HorizontalAlignment="Left" Margin="215,125,0,0" Foreground="{x:Null}" VerticalAlignment="Top" Click="InstallThemeButton_Click">
+                            <Rectangle Fill="White" Width="15" Height="15">
+                                <Rectangle.OpacityMask>
+                                    <VisualBrush Visual="{StaticResource appbar_return}" Stretch="Uniform" />
+                                </Rectangle.OpacityMask>
+                            </Rectangle>
+                        </Controls:Tile>
                     </Grid>
                 </TabItem>
             </TabControl>

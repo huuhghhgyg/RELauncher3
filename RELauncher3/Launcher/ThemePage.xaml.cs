@@ -1,4 +1,5 @@
-﻿using System;
+﻿using RELauncher3.Properties;
+using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
@@ -140,6 +141,57 @@ namespace RELauncher3.Launcher
         private void ClearCacheButton_Click(object sender, RoutedEventArgs e)
         {
             DeleteTheme();
+        }
+
+        private void InstallThemeButton_Click(object sender, RoutedEventArgs e)
+        {
+            if (ThemeListBox.SelectedItem != null)//列表中有选则的项目
+            {
+                string Color = "Blue";//默认蓝色
+                bool StartIsBlack = false;
+
+                string ThemeName = ThemeListBox.SelectedItem.ToString();
+                string _backgroundpath = "./RE3/Theme/" + ThemeName + "/Background.png";
+                string infoPath = "./RE3/Theme/" + ThemeName + "/Theme.Info";
+
+                if (File.Exists(infoPath))
+                {
+                    StreamReader sr = new StreamReader("./RE3/Theme/" + ThemeName + "/Theme.Info", Encoding.Default);
+                    string line;
+                    while ((line = sr.ReadLine()) != null)
+                    {
+                        if (line.ToString() == "Color")
+                        {
+                            line = sr.ReadLine();
+                            Color = line.ToString();
+                        }
+                        if (line.ToString() == "StartIsBlack")
+                        {
+                            line = sr.ReadLine();
+                            StartIsBlack = bool.Parse(line.ToString());
+                        }
+                    }
+
+                    try
+                    {
+                        //应用背景
+                        Settings.Default["BGPPath"] = @_backgroundpath;//设置背景图片路径
+                                                                       ///设置颜色
+                        Settings.Default["ThemeColor"] = Color;
+                        MainWindow.changeColor(Color, "BaseLight");//更改颜色
+                        Settings.Default["StartBoxIsBlack"] = StartIsBlack;
+                        Settings.Default["BingDaily"] = false;
+                        Settings.Default.Save();
+                        PopupMessage("已应用主题");
+                        //ProgressringLoading.Visibility = Visibility.Hidden;
+                    }
+                    catch (System.IO.IOException)
+                    {
+                        PopupMessage("失败，已应用此主题。请转到主题管理清除缓存；或选择其它主题");
+                    }
+                    //MessageBox.Show(ThemeName);
+                }
+            }
         }
     }
 }

@@ -186,9 +186,9 @@ namespace RELauncher3.Theme
         string Color = "Blue";//颜色 (默认蓝色)
         bool StartIsBlack = true;//开始二字的颜色为黑:默认是
 
-        private void InstallBtn_Click(object sender, RoutedEventArgs e)
+        private async void InstallBtn_Click(object sender, RoutedEventArgs e)
         {
-            ProgressringLoading.Visibility = Visibility.Visible;
+            //ProgressringLoading.Visibility = Visibility.Visible;
             ///创建路径
             if (Directory.Exists(@"./RE3/Theme/" + ThemeNameBlock.Text) == false)
             {
@@ -196,16 +196,24 @@ namespace RELauncher3.Theme
             }
             //下载背景图
             string _backgroundpath = "./RE3/Theme/" + ThemeNameBlock.Text + "/Background.png";
+            string _infopath = "./RE3/Theme/" + ThemeNameBlock.Text + "/Theme.Info";
             try
             {
-                if (BackgroundPicture != "")
+                if (BackgroundPicture != "")//下载背景图
                 {
                     if (File.Exists(@_backgroundpath))
                     {
                         File.Delete(@_backgroundpath);
                     }
-                    DownloadFile(BackgroundPicture, @_backgroundpath);
+                    //DownloadFile(BackgroundPicture, @_backgroundpath);
+                    await DownloadFileAsync(BackgroundPicture, @_backgroundpath);
                 }
+                if (File.Exists(_infopath))
+                {
+                    File.Delete(_infopath);
+                }
+                ThemeInfo_str = await GetRequest(dirURL + "/Theme.Info");//获取主题信息
+                File.WriteAllText(_infopath, ThemeInfo_str);//写入文本文件
 
                 //应用背景
                 Settings.Default["BGPPath"] = @_backgroundpath;//设置背景图片路径
@@ -216,7 +224,7 @@ namespace RELauncher3.Theme
                 Settings.Default["BingDaily"] = false;
                 Settings.Default.Save();
                 PopupMessage("已应用主题");
-                ProgressringLoading.Visibility = Visibility.Hidden;
+                //ProgressringLoading.Visibility = Visibility.Hidden;
             }
             catch (System.IO.IOException)
             {
@@ -228,6 +236,32 @@ namespace RELauncher3.Theme
         {
             WebClient myWebClient = new WebClient();
             myWebClient.DownloadFile(url, SavePath);
+        }
+
+        async Task DownloadFileAsync(string URL, string path)//异步下载文件
+        {
+            using (WebClient client = new WebClient())
+            {
+                Task download = client.DownloadFileTaskAsync(URL, path);
+                client.DownloadProgressChanged += client_DownloadProgressChanged;
+                client.DownloadFileCompleted += client_DownloadFileCompleted;
+                await download;
+            }
+        }
+
+        void client_DownloadProgressChanged(object sender, DownloadProgressChangedEventArgs e)
+        {
+            string percent = ((double)e.BytesReceived / (double)e.TotalBytesToReceive * 100).ToString("0");
+            DownloadProgressBar.Value = double.Parse(percent);
+        }
+
+        void client_DownloadFileCompleted(object sender, System.ComponentModel.AsyncCompletedEventArgs e)
+        {
+            if (e.Cancelled)
+            {
+                MessageBox.Show("文件下载被取消", "提示");
+            }
+            //下载成功
         }
     }
 }

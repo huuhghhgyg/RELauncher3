@@ -28,6 +28,7 @@
                 Content="应用"
                 Style="{DynamicResource AccentedSquareButtonStyle}" Margin="0,45,50,0" HorizontalAlignment="Right" Height="31" VerticalAlignment="Top" BorderBrush="{x:Null}" Click="InstallBtn_Click" IsEnabled="False" />
                 <Controls:ProgressRing x:Name="ProgressringLoading" Margin="0,45,15,0" Width="30" Height="30" HorizontalAlignment="Right" VerticalAlignment="Top"/>
+                <Controls:MetroProgressBar x:Name="DownloadProgressBar" Width="100" Height="5" HorizontalAlignment="Right" VerticalAlignment="Top" Margin="0,80,50,0"/>
                 <TextBlock x:Name="ThemedescribtionTitle" FontSize="25" Text="介绍" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="20,450,0,0"/>
                 <TextBlock x:Name="ThemeDescribtion" FontSize="16" Text="ThemeDescribtion" Margin="20,490,100,10"/>
                 <Image x:Name="IconBox" HorizontalAlignment="Left" Height="100" Margin="20,30,0,0" VerticalAlignment="Top" Width="100"/>
